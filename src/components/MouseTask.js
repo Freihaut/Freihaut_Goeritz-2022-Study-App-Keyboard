@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 const {ipcRenderer} = require("electron");
 
 // import the mouse Tracker
-import MouseTracker from "./MouseTracker";
+import MouseTracker from "./KeyboardTracker";
 
 // import the mouse task image
 import MouseTaskImage from "./base64Images/MouseTaskImage";
