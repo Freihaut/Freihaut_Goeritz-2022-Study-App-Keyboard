@@ -1,0 +1,90 @@
+{
+  "name": "Studien-App",
+  "productName": "Studien-App",
+  "version": "1.0.0",
+  "description": "Studien-App by Paul Freihaut, Wirtschaftspsychologie, Universität Freiburg",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "publish": "electron-forge publish",
+    "package": "electron-forge package",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Studien-App/Paul Freihaut",
+    "email": "paul.freihaut@psychologie.uni-freiburg.de"
+  },
+  "license": "MIT",
+  "build": {
+    "appId": "freihaut.studien-app",
+    "productName": "Studien-App",
+    "afterSign": "./afterSignHook.js",
+    "win": {
+      "target": "nsis",
+      "icon": "src/Study-App-Icon.ico",
+      "publisherName": "Albert-Ludwigs-Universität Freiburg"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "src/Mac-App-Icon.png",
+      "hardenedRuntime": true,
+      "entitlements": "src/entitlements.mac.inherit.plist"
+    },
+    "nsis": {
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "oneClick": true,
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": true
+    }
+  },
+  "config": {
+    "forge": {
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.js",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^4.2.1",
+    "dotenv": "^10.0.0",
+    "electron": "12.0.1",
+    "electron-builder": "^22.10.5",
+    "electron-notarize": "^1.0.0",
+    "node-loader": "^1.0.1",
+    "style-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "bulma": "^0.9.2",
+    "electron-json-storage": "^4.5.0",
+    "file-loader": "^6.2.0",
+    "firebase": "^8.3.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
