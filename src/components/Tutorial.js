@@ -6,7 +6,7 @@ and optionally when the participant wants to see it again by clicking on the inf
 import React, { Component } from 'react';
 
 import SelfReport from "./SelfReport";
-import MouseTask from "./MouseTask";
+import KeyboardTask from "./KeyboardTask";
 import AppStartPage from "./AppStartPage";
 import Sociodemographics from "./Sociodemographics";
 
@@ -57,9 +57,9 @@ export default class Tutorial extends Component {
         if (state === "welcome") {
             return (<AppStartPage tutorial={true} endCurrentPage={() => this.switchPage("task")}/>)
         } else if (state === "task") {
-            return (<MouseTask intro={true}
+            return (<KeyboardTask intro={true}
                                endTask={() => this.switchPage("selfReport")}
-                               mouseTaskSize={this.props.mouseTaskSize}/>)
+                               taskWindowSize={this.props.taskWindowSize}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
                                 buttonText={"Weiter"}

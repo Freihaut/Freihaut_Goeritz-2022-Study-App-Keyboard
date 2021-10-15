@@ -21,13 +21,13 @@ export default class App extends Component {
         // initialize Firebase
         //TODO: Changed Config to a test Firebase Project
         const firebaseConfig = {
-            apiKey: "AIzaSyCO0IdxZEGms4ve6cdmzSDDgaYeCRQI7aA",
-            authDomain: "test-project-c54c0.firebaseapp.com",
-            projectId: "test-project-c54c0",
-            storageBucket: "test-project-c54c0.appspot.com",
-            messagingSenderId: "1041378300647",
-            appId: "1:1041378300647:web:863ad64eac44eb8e4b4842",
-            databaseURL: "https://test-project-c54c0-default-rtdb.europe-west1.firebasedatabase.app"
+            apiKey: "AIzaSyBPztHuohY3zpWN5kJCIv50wrn4IhZy_co",
+            authDomain: "longi-keyboard-study.firebaseapp.com",
+            projectId: "longi-keyboard-study",
+            storageBucket: "longi-keyboard-study.appspot.com",
+            messagingSenderId: "55006578878",
+            appId: "1:55006578878:web:db8dbb0b555a9e2adb76ef",
+            measurementId: "G-0Z9SF3F0W1"
         };
 
 

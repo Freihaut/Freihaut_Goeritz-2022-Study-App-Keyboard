@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 const {ipcRenderer} = require("electron");
 
 import SelfReport from "./SelfReport";
-import MouseTask from "./MouseTask";
+import KeyboardTask from "./KeyboardTask";
 import AppStartPage from "./AppStartPage";
 
 
@@ -27,9 +27,9 @@ export default class ReshowAppInfo extends Component {
         if (state === "infoPage") {
             return (<AppStartPage tutorial={false} endCurrentPage={() => this.switchPage("task")}/>)
         } else if (state === "task") {
-            return (<MouseTask intro={true}
+            return (<KeyboardTask intro={true}
                                endTask={() => this.switchPage("selfReport")}
-                               mouseTaskSize={this.props.mouseTaskSize}/>)
+                               taskWindowSize={this.props.taskWindowSize}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
                                 buttonText={"Fenster schließen"}

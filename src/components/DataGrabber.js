@@ -5,7 +5,7 @@ and optionally when the participant wants to see it again by clicking on the inf
 
 // import the self-report question component and the mouse task component
 import SelfReport from "./SelfReport";
-import MouseTask from "./MouseTask";
+import KeyboardTask from "./KeyboardTask";
 
 import React, { Component } from 'react';
 
@@ -24,7 +24,7 @@ export default class DataGrabber extends Component {
 
 
     // switch from the mouseTask to the Self Report
-    endMouseTask(data) {
+    endKeyboardTask(data) {
 
         // add the mouse data to the grabbed data dictionary
        Object.assign(this.grabbedData, data);
@@ -46,9 +46,9 @@ export default class DataGrabber extends Component {
         return(
             <div style={{display: "flex", alignItems: "center", height: "100vh"}}>
                 <div style={{margin: "auto"}}>
-                        {this.state.phase === "mouseTask" ? <MouseTask intro={false} endTask={(data) => this.endMouseTask(data)}
+                        {this.state.phase === "mouseTask" ? <KeyboardTask intro={false} endTask={(data) => this.endKeyboardTask(data)}
                                                                        zoom={this.props.zoom}
-                                                                       mouseTaskSize={this.props.mouseTaskSize}/>
+                                                                       taskWindowSize={this.props.taskWindowSize}/>
                             :
                             this.state.phase === "selfReport" ? <SelfReport intro={false}
                                                                             buttonText={"Eingabe abschließen"}
