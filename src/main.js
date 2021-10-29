@@ -29,7 +29,7 @@ let tray = null;
 
 // set a hard coded study end date
 // TODO: Set a hard coded study end date
-const studyEndDate = new Date(2021, 9, 27);
+const studyEndDate = new Date(2021, 11, 27);
 
 // function to create the main app window in which the app is shown
 const createWindow = (appPage) => {
@@ -400,7 +400,7 @@ ipcMain.on("tutorialEnd", () => {
 
 // start to log mouse data in the main process for xx minutes and trigger an create Logger window event after another
 // xx minutes
-const startLogger = (startTime) => {
+const startLogger = () => {
 
   // check if the startTime of the Browser window creation is after the time limit of the study (14 days)
   dataStorage.get("s", (err, data) => {

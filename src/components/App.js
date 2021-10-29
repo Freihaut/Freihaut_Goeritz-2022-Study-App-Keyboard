@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import bulma from 'bulma/css/bulma.css';
-const {ipcRenderer} = require("electron");
+const { ipcRenderer } = require("electron");
 
 
 import firebase from "firebase/app";
@@ -38,7 +38,7 @@ export default class App extends Component {
         // if there is no participant ID, create a participantId and save it in the local storage
         if (!dataSaveId) {
             const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            dataSaveId = [...Array(10)].map(_ => alphabet[~~(Math.random()*alphabet.length)]).join('')
+            dataSaveId = [...Array(10)].map(_ => alphabet[~~(Math.random() * alphabet.length)]).join('')
             window.localStorage.setItem("participantID", dataSaveId);
         }
 
@@ -59,14 +59,14 @@ export default class App extends Component {
         // which windows zoom level the participant uses (in addition to other screen related infos) and the user Id for the end of the study
         ipcRenderer.once("appPageToRender", (event, page, displayInfo) => {
             this.displayInfo = displayInfo;
-            this.setState({page: page, taskWindowSize: displayInfo.windBounds.width});
+            this.setState({ page: page, taskWindowSize: displayInfo.windBounds.width });
         })
 
         // listens to a resize event of the browser window and chnaged the mouse task size + additionally logs the
         // information
         ipcRenderer.on("resizedWindow", (event, size) => {
-            this.setState({taskWindowSize: size});
-            this.displayInfo = {...this.displayInfo, ...{resized: {newSize: size, date: Date.now()}}}
+            this.setState({ taskWindowSize: size });
+            this.displayInfo = { ...this.displayInfo, ...{ resized: { newSize: size, date: Date.now() } } }
         })
     }
 
@@ -74,7 +74,7 @@ export default class App extends Component {
 
         // Set the auth persistence on login to Local to keep the user logged into the app unless the user delets the
         // local app data
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
         // if the user successfully logged in, set the user id to the state
         firebase.auth().onAuthStateChanged((user) => {
@@ -83,9 +83,9 @@ export default class App extends Component {
                 // https://firebase.google.com/docs/reference/js/firebase.User
                 // console.log("User signed in with user ID: " + user.uid);
                 // save the info that the user has logged in, unless the study is over, then only show the last page
-                this.setState({userId: user.uid, fireBaseCallFails: false, callingFirebase: false}, () => {firebase.database().ref("userData/" + user.uid).update({"loggedIn": true})});
+                this.setState({ userId: user.uid, fireBaseCallFails: false, callingFirebase: false }, () => { firebase.database().ref("userData/" + user.uid).update({ "loggedIn": true }) });
                 // check if there is locally saved data that hasnt been pushed to firebase yet (e.g. because the user was offline)
-                const storage = {...localStorage};
+                const storage = { ...localStorage };
                 // loop the data from the local storage
                 for (const [key, value] of Object.entries(storage)) {
                     // only save the study data from the local storage, not any other data that is saved in the local storage
@@ -107,13 +107,13 @@ export default class App extends Component {
 
                 // if the user reached the end page, save that the user finished the study
                 if (this.state.page === "studyEnd") {
-                    firebase.database().ref("userData/" + user.uid).update({"finishedStudy": true})
+                    firebase.database().ref("userData/" + user.uid).update({ "finishedStudy": true })
                 }
 
             } else {
                 // User is signed out, give him a bad user id, unless the study is already over, then prevent from
                 // showing the login page
-                this.setState({userId: -99})
+                this.setState({ userId: -99 })
             }
         });
 
@@ -126,10 +126,10 @@ export default class App extends Component {
         connectedRef.on("value", (snap) => {
             if (snap.val() === true) {
                 // set online state if the user is online
-                this.setState({online: true});
+                this.setState({ online: true });
             } else {
                 // set offline state if the user is offline
-                this.setState({online: false});
+                this.setState({ online: false });
             }
         });
     }
@@ -138,17 +138,17 @@ export default class App extends Component {
     appLogin(id, password) {
 
         // disable the login button until the logging is completed (or fails)
-        this.setState({fireBaseCallFails: false, callingFirebase: true}, () => {
+        this.setState({ fireBaseCallFails: false, callingFirebase: true }, () => {
 
             // add a "loading timeout" of 400ms to visualize that the user clicked a button and the app is working
-            setTimeout(()=> {
+            setTimeout(() => {
                 firebase.auth().signInWithEmailAndPassword(id, password).catch((error) => {
                     if (error) {
-                        this.setState({fireBaseCallFails: true, callingFirebase: false});
+                        this.setState({ fireBaseCallFails: true, callingFirebase: false });
                     }
                 })
             }, 400)
-            })
+        })
     }
 
     // Define functions that do the data handling when the user is done with the tutorial or data logger
@@ -157,7 +157,7 @@ export default class App extends Component {
     endTutorial(tutData) {
 
         // add the version number to the tut data to keep track of potential changes in the study app version
-        const studyStartData = {...tutData, ...{appVersion: "Test_KeyboardLogger"}, ...{"os": process.platform}}
+        const studyStartData = { ...tutData, ...{ appVersion: "Test_KeyboardLogger" }, ...{ "os": process.platform } }
 
         // get the tutorial data (sociodemographics) and send them to firebase when the tutorial is done
         // check if the user logged into firebase and check if the user is online or offline
@@ -185,9 +185,9 @@ export default class App extends Component {
     // handle the end of the data grabbing
     endDataGrabber(grabberData) {
 
-        // get the mouse data from the mouse task, the self report data and the main process mouse data (which is saved
+        // get the data from the keyboard task, the self report data and the main process mouse data (which is saved
         // in the grabberData, add the timestamp when the data was saved and the zoom level
-        const grabbedData = {"grabbedData": {...grabberData, ...{"time": Date.now()}, ...{disInf: this.displayInfo}}};
+        const grabbedData = { "grabbedData": { ...grabberData, ...{ "time": Date.now() }, ...{ disInf: this.displayInfo } } };
 
         // check if the user has an id and check if the user is offline or online
         if (this.state.userId && this.state.online) {
@@ -200,9 +200,9 @@ export default class App extends Component {
                     ipcRenderer.send("close");
                 } else {
                     // If the data was successfully saved in firebase, notify that the participant participated in data collection
-                    firebase.database().ref("userData/" + this.state.userId).update({"dataWasLogged": true}, () => {
-                            // close the logger window
-                            ipcRenderer.send("close");
+                    firebase.database().ref("userData/" + this.state.userId).update({ "dataWasLogged": true }, () => {
+                        // close the logger window
+                        ipcRenderer.send("close");
                     })
                 }
             });
@@ -229,26 +229,26 @@ export default class App extends Component {
     saveParticipationCredit(bool) {
 
         // disable the data saving button until the saving completes or fails
-        this.setState({fireBaseCallFails: false, callingFirebase: true}, () => {
+        this.setState({ fireBaseCallFails: false, callingFirebase: true }, () => {
 
             // add a "loading timeout" of 400ms to visualize that the user clicked a button and the app is working
-            setTimeout(()=> {
+            setTimeout(() => {
                 if (this.state.userId && this.state.online) {
                     // save the participant Info about the study credit in the database
-                    firebase.database().ref("userData/" + this.state.userId).update({"donatesBack": bool}, (error) => {
+                    firebase.database().ref("userData/" + this.state.userId).update({ "donatesBack": bool }, (error) => {
                         if (error) {
                             // could not save the data, show a warning
-                            this.setState({fireBaseCallFails: true, callingFirebase: false})
+                            this.setState({ fireBaseCallFails: true, callingFirebase: false })
                         } else {
                             // show the last page and save the information that the user already received the study credit in the localStorage
-                            this.setState({endPage: true, fireBaseCallFails: false, callingFirebase: false}, () => {
+                            this.setState({ endPage: true, fireBaseCallFails: false, callingFirebase: false }, () => {
                                 window.localStorage.setItem("endPage", "true");
                             })
                         }
                     })
                 } else {
                     // not connected to the internet, show a warning
-                    this.setState({fireBaseCallFails: true, callingFirebase: false})
+                    this.setState({ fireBaseCallFails: true, callingFirebase: false })
                 }
             }, 400)
 
@@ -316,17 +316,17 @@ export default class App extends Component {
                     this.state.userId ?
                         this.state.userId === -99 ?
                             <Login badLogin={this.state.fireBaseCallFails}
-                                   loginAttempt={this.state.callingFirebase}
-                                   logIn={(id, pw) => this.appLogin(id, pw)}/> :
-                            this.state.page === "tutorial" ? <Tutorial endTutorial={(data)=> this.endTutorial(data)}
-                                                                       taskWindowSize={this.state.taskWindowSize}/> :
+                                loginAttempt={this.state.callingFirebase}
+                                logIn={(id, pw) => this.appLogin(id, pw)} /> :
+                            this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
+                                taskWindowSize={this.state.taskWindowSize} /> :
                                 this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
-                                                                            taskWindowSize={this.state.taskWindowSize}/> :
-                                    this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize}/> :
+                                    taskWindowSize={this.state.taskWindowSize} /> :
+                                    this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
                                         this.state.page === "studyEnd" ? <StudyEnd endPage={this.state.endPage}
-                                                                                   savingAttempt={this.state.callingFirebase}
-                                                                                   savingFailed={this.state.fireBaseCallFails}
-                                                                                   collectCredit={(bool) => this.saveParticipationCredit(bool)}/>
+                                            savingAttempt={this.state.callingFirebase}
+                                            savingFailed={this.state.fireBaseCallFails}
+                                            collectCredit={(bool) => this.saveParticipationCredit(bool)} />
                                             : null
                         : null
                 }

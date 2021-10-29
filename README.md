@@ -1,14 +1,14 @@
 ## Study-App
 
 This repository contains the study-app that was used for a longitudinal study about the relationship between stress and 
-computer mouse usage.
+keyboard typing behavior.
 
 ### Study-App Description
 
-The study-app needs to be installed by participants and logs participants computer mouse usage as well as their stress 
-level in frequent intervals of about 60 minutes. The computer mouse positional data on the screen
-is logged every 20 milliseconds for 5 minutes prior to each measurement interval. Each interval includes
-a standardized point-and-click task before participants are  asked to rate their valence and arousal on self-report scales.
+The study-app needs to be installed by participants and logs participants keyboard typing as well as their stress 
+level in frequent intervals of about 60 minutes. The typing task resembles a password typing situation in which
+participants are shown a password and have to retype it into an input field. The self-report measures are the 
+valence and arousal scales.
 
 Before the start of the measurement intervals, the study-app preceeds with a tutorial about the study-app.
 The study duration is 14 days. The study-app will notify participants about the study end and will stop data measurement.
