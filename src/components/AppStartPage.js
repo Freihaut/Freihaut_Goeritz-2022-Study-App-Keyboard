@@ -38,7 +38,7 @@ export default function AppStartPage (props) {
                <p>
                    Während Sie an der Studie teilnehmen und solange die Studien-App ausgeführt wird, öffnet die Studien-App in
                    regelmäßigen Zeitabständen von 60 Minuten ein Fenster zur Datenerhebung. Die Datenerhebung umfasst zwei Teile und dauert
-                   etwa 30 Sekunden. Im ersten Teil geht es darum, eine Aufgabe zu bearbeiten. Im zweiten Teil werden Sie gebeten, Fragen zu beantworten.
+                   etwa 30 Sekunden. Im ersten Teil geht es darum, Fragen zu beantworten. Im zweiten Teil werden Sie gebeten, eine Aufgabe zu bearbeiten.
                    Beide Teile werden Ihnen in Schritt 2 und Schritt 3 dieser Einführung genauer erläutert.
                </p>
                <p>

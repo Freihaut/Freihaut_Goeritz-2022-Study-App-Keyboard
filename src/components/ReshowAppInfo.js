@@ -50,14 +50,14 @@ export default class ReshowAppInfo extends Component {
                                         <span>1. Studien-App Infos</span>
                                     </a>
                                 </li>
-                                <li className={this.state.page === "task" ? "is-active" : ""}>
-                                    <a onClick={() => this.switchPage("task")}>
-                                        <span>2. Vorschau Aufgabe</span>
-                                    </a>
-                                </li>
                                 <li className={this.state.page === "selfReport" ? "is-active" : ""}>
                                     <a onClick={() => this.switchPage("selfReport")}>
-                                        <span>3. Vorschau Fragen</span>
+                                        <span>2. Vorschau Fragen</span>
+                                    </a>
+                                </li>
+                                <li className={this.state.page === "task" ? "is-active" : ""}>
+                                    <a onClick={() => this.switchPage("task")}>
+                                        <span>3. Vorschau Aufgabe</span>
                                     </a>
                                 </li>
                             </ul>

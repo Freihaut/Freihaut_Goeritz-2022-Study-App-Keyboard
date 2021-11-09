@@ -69,7 +69,7 @@ export default class SelfReport extends Component {
 
                         <div className={"content"}>
                             <p>
-                               Zum Abschluss jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
+                               Zu Beginn jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
                                 angezeigt.
                             </p>
                             <p>

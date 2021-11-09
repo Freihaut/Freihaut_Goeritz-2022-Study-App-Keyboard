@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-const { ipcRenderer } = require("electron");
 
 // import the mouse Tracker
 import KeyboardTracker from "./KeyboardTracker";
@@ -17,22 +16,15 @@ export default class MouseTask extends Component {
 
         this.state = {
             modal: this.props.intro ? "modal is-active" : "modal",
+            inputValue: null,
             textIsCorrect: true,
+            numberOfTries: 0,
+            passwordSubmission: false,
             taskWindowSize: Math.floor(this.props.taskWindowSize * 0.66)
         }
 
-        // hold all possible 25 task order coordinates in a variable (they were randomly generated with the constraint
-        // that they had to fit without overlap and then hard coded here)
-        const trialText = [
-            "6a5CiM", "7cJhWs", "3Kzn1H", "Tz3j98", "3pkabE", "yEN3fD", "hf6GaS", "j27N7i"
-        ]
-
-        // getting a random number var randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-        // return a random number between 0 and 24
-        this.randomNumber = Math.floor(Math.random() * trialText.length);
-
-        // select a randomly chosen click order from all 25 possible click orders
-        this.typingText = trialText[this.randomNumber];
+        // define a password that is used in the typing task
+        this.password = "Test8673!"
 
         // settings for the modal if its the task intro and the modal is triggered
         if (this.props.intro) {
@@ -52,27 +44,38 @@ export default class MouseTask extends Component {
         }
     }
 
-    checkIfEqual(event) {
-        // get the value and length of the written text in the text field
-        let writtenText = event.target.value.trim();
-        let textLen = writtenText.length;
+    handleChange(e) {
+        this.setState({inputValue: e.target.value}, ()=> {console.log(this.state.inputValue)})
+    }
 
-        if (writtenText === this.typingText) {
-            this.endTask()
-        } else if (this.typingText.slice(0, textLen) !== writtenText) {
-            // if the the text is the same as the sliced text to retype, show no error
-            this.setState({
-                textIsCorrect: false,
-            })
-        } else {
-            // if the user makes a typing mistake, show error --> set state to incorrect
-            this.setState({
-                textIsCorrect: true,
-            })
-        }
+    checkIfEqual(event) {
+
+        event.preventDefault();
+        // get the value and length of the written text in the text field
+        let writtenText = this.state.inputValue;
+
+        this.setState({textIsCorrect: true, passwordSubmission: true}, () => {
+
+            setTimeout(() => {
+                if (writtenText === this.password) {
+                    this.endTask()
+                } else {
+                    // if the typed in password was wrong, show an error message
+                    this.setState({
+                        textIsCorrect: false,
+                        numberOfTries : this.state.numberOfTries + 1,
+                        passwordSubmission: false
+                    })
+                }
+
+            }, 1000)
+        })
     }
 
     endTask() {
+
+        console.log(this.typingData);
+
         this.props.endTask({
             typingData: this.typingData,
         });
@@ -81,8 +84,11 @@ export default class MouseTask extends Component {
 
     // add the info about which circle was clicked last to the data: keep the string as short as possible to save data
     onKeyboardEvent(datapoint) {
+
+        console.log(datapoint);
+
         const taskInfo = {
-            cor: this.state.textIsCorrect
+            cor: this.state.numberOfTries
         }
 
         Object.assign(datapoint, taskInfo);
@@ -110,31 +116,17 @@ export default class MouseTask extends Component {
                     </header>
                     <section className="modal-card-body">
                         <div>
-                            <div className="media">
-                                <div className="media-left" style={{ display: "flex", alignSelf: "center" }}>
-                                    <figure className="image" style={{ width: "10rem" }}>
-                                        <img src={MouseTaskImage}
-                                            alt={"Placeholder image"}
-                                        />
-                                    </figure>
-                                </div>
-                                <div className={"media-content"}>
-                                    <p>
-                                        Jede Datenerhebung beginnt mit der Aufgabe, einen festgelegten Text abzuschreiben
-                                        (siehe oberes Bild).
-                                    </p>
-                                    <br />
-                                    <p>
-                                        Der Text muss fehlerfrei abgeschrieben werden. Sobald Sie einen Fehler beim
-                                        Abschreiben machen wird Ihnen das angezeigt (siehe unteres Bild).
-                                        Korrigieren Sie den Fehler, bevor Sie mit dem Abschreiben fortfahren.
-                                    </p>
-                                    <br />
-                                    <p>
-                                        Die Aufgabe endet, sobald der gesamte Text korrekt abgeschrieben wurde.
-                                    </p>
-                                </div>
-                            </div>
+                            <p>
+                                Der Abschluss jeder Datenerhebung ist die Aufgabe, einen vorgegebenes Passwort
+                                in ein Textfeld abzuschreiben.
+                            </p>
+                            <br />
+                            <p>
+                                Bestätigen Sie die Eingabe durch Drücken der Enter Taste. Falls Sie das Passwort
+                                falsch abgeschrieben haben, wird Ihnen dies angezeigt. Die Aufgabe endet sobald
+                                Sie das Passwort korrekt abgeschrieben haben.
+                            </p>
+                            <br />
                         </div>
 
                     </section>
@@ -163,7 +155,8 @@ export default class MouseTask extends Component {
                 <div className="card" style={{ width: this.state.taskWindowSize}}>
                     <header className="card-header">
                         <p className="card-header-title">
-                            Bitte schreiben Sie den Text in das Textfeld ab
+                            Bitte geben Sie das Passwort ein und bestätigen Sie Ihre Eingabe
+                            durch das Drücken der Enter-Taste
                         </p>
                     </header>
                     <div className="card-content" style={{margin: "3rem"}}>
@@ -174,20 +167,24 @@ export default class MouseTask extends Component {
                                   msUserSelect: "none",
                                   UserSelect: "none",
                                   marginBottom: "2rem"
-                            }}>{this.typingText}</label>
-                            <div className="control">
-                                <input className={ this.state.textIsCorrect ? "input is-large is-link" : "input is-large is-danger"}
-                                 type="text"
-                                 ref={this.inputRef}
-                                 onMouseDown={(event) => this.preventClicking(event)}
-                                 onKeyUp={(ev) => this.checkIfEqual(ev)}
-                                 spellCheck={false}
-                                 />
-                            </div>
-                            <p className="help is-large is-danger"
-                            style={{visibility: this.state.textIsCorrect ? "hidden" : "visible"}}>
-                                Bitte korrigieren Sie den Fehler
-                            </p>
+                            }}>{this.password}</label>
+                            <form onSubmit={(e) => this.checkIfEqual(e)}>
+                                <div className={this.state.passwordSubmission ? "control is-large is-loading" : "control is large"}>
+                                    <input className={ this.state.passwordSubmission ? "input is-large is-link" :
+                                        this.state.textIsCorrect ? "input is-large is-link" : "input is-large is-danger"}
+                                           type="password"
+                                           ref={this.inputRef}
+                                           onChange={(event) => this.handleChange(event)}
+                                           onMouseDown={(event) => this.preventClicking(event)}
+                                           spellCheck={false}
+                                           disabled={this.state.passwordSubmission}
+                                    />
+                                </div>
+                                <p className="help is-large is-danger"
+                                   style={{visibility: this.state.textIsCorrect ? "hidden" : "visible"}}>
+                                    Das von Ihnen eingegebene Passwort ist inkorrekt
+                                </p>
+                            </form>
                         </div>
                     </div>
                 </div>

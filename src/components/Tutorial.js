@@ -55,15 +55,15 @@ export default class Tutorial extends Component {
     renderTutorialPage(state) {
 
         if (state === "welcome") {
-            return (<AppStartPage tutorial={true} endCurrentPage={() => this.switchPage("task")}/>)
-        } else if (state === "task") {
-            return (<KeyboardTask intro={true}
-                               endTask={() => this.switchPage("selfReport")}
-                               taskWindowSize={this.props.taskWindowSize}/>)
+            return (<AppStartPage tutorial={true} endCurrentPage={() => this.switchPage("selfReport")}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
                                 buttonText={"Weiter"}
-                                endReport={() => this.switchPage("sociodem")}/>)
+                                endReport={() => this.switchPage("task")}/>)
+        } else if (state === "task") {
+            return (<KeyboardTask intro={true}
+                               endTask={() => this.switchPage("sociodem")}
+                               taskWindowSize={this.props.taskWindowSize}/>)
         } else if (state === "sociodem") {
             return (<Sociodemographics answers={this.state.socioDemographics}
                                        hasEnded={this.state.hasEnded}
@@ -86,14 +86,14 @@ export default class Tutorial extends Component {
                                                 <span>1. Studien-App Infos</span>
                                             </a>
                                         </li>
-                                        <li className={this.state.page === "task" ? "is-active" : ""}>
-                                            <a onClick={() => this.state.hasEnded ? null : this.switchPage("task")}>
-                                                <span>2. Vorschau Aufgabe</span>
-                                            </a>
-                                        </li>
                                         <li className={this.state.page === "selfReport" ? "is-active" : ""}>
                                             <a onClick={() => this.state.hasEnded ? null : this.switchPage("selfReport")}>
-                                                <span>3. Vorschau Fragen</span>
+                                                <span>2. Vorschau Fragen</span>
+                                            </a>
+                                        </li>
+                                        <li className={this.state.page === "task" ? "is-active" : ""}>
+                                            <a onClick={() => this.state.hasEnded ? null : this.switchPage("task")}>
+                                                <span>3. Vorschau Aufgabe</span>
                                             </a>
                                         </li>
                                         <li className={this.state.page === "sociodem" ? "is-active" : ""}>

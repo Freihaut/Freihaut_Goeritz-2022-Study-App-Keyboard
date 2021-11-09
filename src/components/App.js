@@ -72,9 +72,17 @@ export default class App extends Component {
 
     componentDidMount() {
 
-        // Set the auth persistence on login to Local to keep the user logged into the app unless the user delets the
+        // Set the auth persistence on login to Local to keep the user logged into the app unless the user deletes the
         // local app data
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        //     .then(function () {
+        //         return firebase.auth().signInAnonymously();
+        //     })
+        //     .catch(function (error) {
+        //         let errorCode = error.code;
+        //         let errorMessage = error.message;
+        //         // console.log(errorCode, errorMessage)
+        //     });
 
         // if the user successfully logged in, set the user id to the state
         firebase.auth().onAuthStateChanged((user) => {

@@ -16,25 +16,25 @@ export default class DataGrabber extends Component {
         super(props);
 
         this.state = {
-            phase: "mouseTask"
+            phase: "selfReport"
         }
 
         this.grabbedData = {}
     }
 
 
-    // switch from the mouseTask to the Self Report
-    endKeyboardTask(data) {
+    // switch from the self Report to the Keyboard Task
+    endSelfReport(data) {
 
-        // add the mouse data to the grabbed data dictionary
+        // add the self report data to the grabbed data dictionary
        Object.assign(this.grabbedData, data);
 
-        this.setState({phase: "selfReport"});
+        this.setState({phase: "keyboardTask"});
     }
 
     // end the DataGrabber and log the grabbed Data
     endGrabber(data) {
-        // add the self-report data to the mouse data
+        // add keyboard usage data
         Object.assign(this.grabbedData, data);
 
         // send the grabbed Data to the parent component in the props
@@ -46,7 +46,7 @@ export default class DataGrabber extends Component {
         return(
             <div style={{display: "flex", alignItems: "center", height: "100vh"}}>
                 <div style={{margin: "auto"}}>
-                        {this.state.phase === "mouseTask" ? <KeyboardTask intro={false} endTask={(data) => this.endKeyboardTask(data)}
+                        {this.state.phase === "keyboardTask" ? <KeyboardTask intro={false} endTask={(data) => this.endGrabber(data)}
                                                                        zoom={this.props.zoom}
                                                                        taskWindowSize={this.props.taskWindowSize}/>
                             :
