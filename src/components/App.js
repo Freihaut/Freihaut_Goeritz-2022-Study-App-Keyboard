@@ -11,7 +11,6 @@ import Tutorial from "./Tutorial";
 import DataGrabber from "./DataGrabber";
 import ReshowAppInfo from "./ReshowAppInfo"
 import StudyEnd from "./StudyEnd";
-import Login from "./LoginPage";
 
 export default class App extends Component {
 
@@ -23,6 +22,7 @@ export default class App extends Component {
         const firebaseConfig = {
             apiKey: "AIzaSyBPztHuohY3zpWN5kJCIv50wrn4IhZy_co",
             authDomain: "longi-keyboard-study.firebaseapp.com",
+            databaseURL: "https://longi-keyboard-study-default-rtdb.europe-west1.firebasedatabase.app",
             projectId: "longi-keyboard-study",
             storageBucket: "longi-keyboard-study.appspot.com",
             messagingSenderId: "55006578878",
@@ -34,25 +34,20 @@ export default class App extends Component {
         firebase.initializeApp(firebaseConfig);
 
         // check if there is a participant ID in the local storage
-        let dataSaveId = window.localStorage.getItem('participantID');
+        let participantID = window.localStorage.getItem('participantID');
         // if there is no participant ID, create a participantId and save it in the local storage
-        if (!dataSaveId) {
+        if (!participantID) {
             const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            dataSaveId = [...Array(10)].map(_ => alphabet[~~(Math.random() * alphabet.length)]).join('')
-            window.localStorage.setItem("participantID", dataSaveId);
+            participantID = [...Array(10)].map(_ => alphabet[~~(Math.random() * alphabet.length)]).join('')
+            window.localStorage.setItem("participantID", participantID);
         }
 
         this.state = {
             page: null,
             userId: undefined,
             online: false,
-            callingFirebase: false,
-            fireBaseCallFails: false,
-            dataSaveId: dataSaveId,
+            parID: participantID,
             taskWindowSize: null,
-            // check if the current date is after the study end date, if no, check if the participant has already seen the participation credit page
-            // "Hack" in the control condition --> endPage is set to true to always show the endPage (dirty solution)
-            endPage: true,
         }
 
         // listen to the message from the main process that tells the renderer process which page to load and
@@ -74,31 +69,30 @@ export default class App extends Component {
 
         // Set the auth persistence on login to Local to keep the user logged into the app unless the user deletes the
         // local app data
-        // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        //     .then(function () {
-        //         return firebase.auth().signInAnonymously();
-        //     })
-        //     .catch(function (error) {
-        //         let errorCode = error.code;
-        //         let errorMessage = error.message;
-        //         // console.log(errorCode, errorMessage)
-        //     });
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            // log the user in anonymously
+            .then(function () {
+                return firebase.auth().signInAnonymously();
+            })
+            .catch(function (error) {
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                // console.log(errorCode, errorMessage)
+            });
 
         // if the user successfully logged in, set the user id to the state
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
                 // https://firebase.google.com/docs/reference/js/firebase.User
-                // console.log("User signed in with user ID: " + user.uid);
-                // save the info that the user has logged in, unless the study is over, then only show the last page
-                this.setState({ userId: user.uid, fireBaseCallFails: false, callingFirebase: false }, () => { firebase.database().ref("userData/" + user.uid).update({ "loggedIn": true }) });
+                this.setState({ userId: user.uid}, () => {firebase.database().ref("parIds/" + this.state.parID).update({par: true})});
                 // check if there is locally saved data that hasnt been pushed to firebase yet (e.g. because the user was offline)
                 const storage = { ...localStorage };
                 // loop the data from the local storage
                 for (const [key, value] of Object.entries(storage)) {
                     // only save the study data from the local storage, not any other data that is saved in the local storage
-                    if ((!key.includes("firebase")) && (key !== "endPage") && (key !== "participantID")) {
-                        firebase.database().ref("studyData/" + this.state.dataSaveId).push(JSON.parse(value), (error) => {
+                    if ((!key.includes("firebase")) && (key !== "participantID")) {
+                        firebase.database().ref("studyData/" + user.uid).push(JSON.parse(value), (error) => {
                             // put the close window in the callback function?
                             if (error) {
                                 // dont do anything
@@ -142,23 +136,6 @@ export default class App extends Component {
         });
     }
 
-    // function that logs into the App (and shows an error message if the login is not successful
-    appLogin(id, password) {
-
-        // disable the login button until the logging is completed (or fails)
-        this.setState({ fireBaseCallFails: false, callingFirebase: true }, () => {
-
-            // add a "loading timeout" of 400ms to visualize that the user clicked a button and the app is working
-            setTimeout(() => {
-                firebase.auth().signInWithEmailAndPassword(id, password).catch((error) => {
-                    if (error) {
-                        this.setState({ fireBaseCallFails: true, callingFirebase: false });
-                    }
-                })
-            }, 400)
-        })
-    }
-
     // Define functions that do the data handling when the user is done with the tutorial or data logger
 
     // end of tutorial (when the user finishes the tutorial, save the sociodemographic data and "start" the data logging
@@ -170,7 +147,7 @@ export default class App extends Component {
         // get the tutorial data (sociodemographics) and send them to firebase when the tutorial is done
         // check if the user logged into firebase and check if the user is online or offline
         if (this.state.userId && this.state.online) {
-            firebase.database().ref("studyData/" + this.state.dataSaveId).push(studyStartData, (error) => {
+            firebase.database().ref("studyData/" + this.state.userId).push(studyStartData, (error) => {
                 // put the close window in the callback function?
                 if (error) {
                     // Data Save error --> save the data locally and end the tutorial
@@ -199,7 +176,7 @@ export default class App extends Component {
 
         // check if the user has an id and check if the user is offline or online
         if (this.state.userId && this.state.online) {
-            firebase.database().ref("studyData/" + this.state.dataSaveId).push(grabbedData, (error) => {
+            firebase.database().ref("studyData/" + this.state.userId).push(grabbedData, (error) => {
                 // put the close window in the callback function?
                 if (error) {
                     // Data Save error --> Save the data locally
@@ -207,11 +184,8 @@ export default class App extends Component {
                     // close the logger window
                     ipcRenderer.send("close");
                 } else {
-                    // If the data was successfully saved in firebase, notify that the participant participated in data collection
-                    firebase.database().ref("userData/" + this.state.userId).update({ "dataWasLogged": true }, () => {
-                        // close the logger window
-                        ipcRenderer.send("close");
-                    })
+                    // close the logger window
+                    ipcRenderer.send("close");
                 }
             });
         } else {
@@ -231,37 +205,6 @@ export default class App extends Component {
         // save the data file locally as a string in the browser local storage
         window.localStorage.setItem(saveString.toString(), JSON.stringify(data));
         // console.log("File was saved locally with the save string " + saveString.toString());
-    }
-
-    // save the participation credit when the user reaches the end of the study
-    saveParticipationCredit(bool) {
-
-        // disable the data saving button until the saving completes or fails
-        this.setState({ fireBaseCallFails: false, callingFirebase: true }, () => {
-
-            // add a "loading timeout" of 400ms to visualize that the user clicked a button and the app is working
-            setTimeout(() => {
-                if (this.state.userId && this.state.online) {
-                    // save the participant Info about the study credit in the database
-                    firebase.database().ref("userData/" + this.state.userId).update({ "donatesBack": bool }, (error) => {
-                        if (error) {
-                            // could not save the data, show a warning
-                            this.setState({ fireBaseCallFails: true, callingFirebase: false })
-                        } else {
-                            // show the last page and save the information that the user already received the study credit in the localStorage
-                            this.setState({ endPage: true, fireBaseCallFails: false, callingFirebase: false }, () => {
-                                window.localStorage.setItem("endPage", "true");
-                            })
-                        }
-                    })
-                } else {
-                    // not connected to the internet, show a warning
-                    this.setState({ fireBaseCallFails: true, callingFirebase: false })
-                }
-            }, 400)
-
-        })
-
     }
 
     // UI Dev functions
@@ -322,20 +265,13 @@ export default class App extends Component {
                     /* Show a blank screen until it is decided if the user is logged in, if the user is logged in
                     * show the study page, else show the login screen */
                     this.state.userId ?
-                        this.state.userId === -99 ?
-                            <Login badLogin={this.state.fireBaseCallFails}
-                                loginAttempt={this.state.callingFirebase}
-                                logIn={(id, pw) => this.appLogin(id, pw)} /> :
-                            this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
-                                taskWindowSize={this.state.taskWindowSize} /> :
-                                this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
-                                    taskWindowSize={this.state.taskWindowSize} /> :
-                                    this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
-                                        this.state.page === "studyEnd" ? <StudyEnd endPage={this.state.endPage}
-                                            savingAttempt={this.state.callingFirebase}
-                                            savingFailed={this.state.fireBaseCallFails}
-                                            collectCredit={(bool) => this.saveParticipationCredit(bool)} />
-                                            : null
+                        this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
+                                                                   taskWindowSize={this.state.taskWindowSize} /> :
+                            this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
+                                                                        taskWindowSize={this.state.taskWindowSize} /> :
+                                this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
+                                    this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.dataSaveId} />
+                                        : null
                         : null
                 }
             </div>
