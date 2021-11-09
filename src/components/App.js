@@ -11,6 +11,7 @@ import Tutorial from "./Tutorial";
 import DataGrabber from "./DataGrabber";
 import ReshowAppInfo from "./ReshowAppInfo"
 import StudyEnd from "./StudyEnd";
+import LanguageSelection from "./LanguageSelection";
 
 export default class App extends Component {
 
@@ -48,6 +49,7 @@ export default class App extends Component {
             online: false,
             parID: participantID,
             taskWindowSize: null,
+            language: window.localStorage.getItem('language')
         }
 
         // listen to the message from the main process that tells the renderer process which page to load and
@@ -91,7 +93,7 @@ export default class App extends Component {
                 // loop the data from the local storage
                 for (const [key, value] of Object.entries(storage)) {
                     // only save the study data from the local storage, not any other data that is saved in the local storage
-                    if ((!key.includes("firebase")) && (key !== "participantID")) {
+                    if ((!key.includes("firebase")) && (key !== "participantID") && (key !== "language")) {
                         firebase.database().ref("studyData/" + user.uid).push(JSON.parse(value), (error) => {
                             // put the close window in the callback function?
                             if (error) {
@@ -134,6 +136,14 @@ export default class App extends Component {
                 this.setState({ online: false });
             }
         });
+    }
+
+    // handle language selection before the user starts the study
+    languageSelected(lang) {
+
+        // save the language in the local storage and set the state to the selected language
+        this.setState({language: lang}, ()=> {window.localStorage.setItem("language", lang)});
+
     }
 
     // Define functions that do the data handling when the user is done with the tutorial or data logger
@@ -265,13 +275,16 @@ export default class App extends Component {
                     /* Show a blank screen until it is decided if the user is logged in, if the user is logged in
                     * show the study page, else show the login screen */
                     this.state.userId ?
-                        this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
-                                                                   taskWindowSize={this.state.taskWindowSize} /> :
-                            this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
-                                                                        taskWindowSize={this.state.taskWindowSize} /> :
-                                this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
-                                    this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.parID} />
-                                        : null
+                        // if no language has been chosen, show the language selection page
+                        !this.state.language ? <LanguageSelection languageSelected={(language) => {this.languageSelected(language)}}/> :
+                            // else show the study page
+                            this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
+                                                                       taskWindowSize={this.state.taskWindowSize} /> :
+                                this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
+                                                                            taskWindowSize={this.state.taskWindowSize} /> :
+                                    this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
+                                        this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.parID} />
+                                            : null
                         : null
                 }
             </div>

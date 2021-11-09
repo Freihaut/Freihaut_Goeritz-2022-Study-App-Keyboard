@@ -47,8 +47,8 @@ const createWindow = (appPage) => {
     targetSize = screenSize.width;
   }
 
-  // let the browser window target take up 85% of the available screen size
-  targetSize = Math.floor(targetSize * 0.85);
+  // let the browser window target take up 75% of the available screen size
+  targetSize = Math.floor(targetSize * 0.75);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -97,9 +97,9 @@ const createWindow = (appPage) => {
 
       let newSize;
       if (display.workAreaSize.width > display.workAreaSize.height) {
-        newSize = Math.floor(display.workAreaSize.height * 0.85)
+        newSize = Math.floor(display.workAreaSize.height * 0.75)
       } else {
-        newSize = Math.floor(display.workAreaSize.width * 0.85)
+        newSize = Math.floor(display.workAreaSize.width * 0.75)
       }
 
       // need to manually setResizable to true and false when resizing, because it wont work otherwise when the resizable
@@ -208,7 +208,7 @@ const createSideWindow = (appPage) => {
   }
 
   // let the browser window target take up 85% of the available screen size
-  targetSize = Math.floor(targetSize * 0.85);
+  targetSize = Math.floor(targetSize * 0.75);
 
   // Create the browser window.
   sideWindow = new BrowserWindow({
@@ -260,9 +260,9 @@ const createSideWindow = (appPage) => {
 
     let newSize;
     if (display.workAreaSize.width > display.workAreaSize.height) {
-      newSize = Math.floor(display.workAreaSize.height * 0.85)
+      newSize = Math.floor(display.workAreaSize.height * 0.75)
     } else {
-      newSize = Math.floor(display.workAreaSize.width * 0.85)
+      newSize = Math.floor(display.workAreaSize.width * 0.75)
     }
 
     // need to manually setResizable to true and false when resizing, because it wont work otherwise when the resizable
