@@ -51,7 +51,7 @@ export default class DataGrabber extends Component {
                                                                        taskWindowSize={this.props.taskWindowSize}/>
                             :
                             this.state.phase === "selfReport" ? <SelfReport intro={false}
-                                                                            buttonText={"Eingabe abschließen"}
+                                                                            buttonText={"Weiter"}
                                                                             endReport={(e) => this.endGrabber(e)}
                                                                             zoom={this.props.zoom}/>
                                 : null}

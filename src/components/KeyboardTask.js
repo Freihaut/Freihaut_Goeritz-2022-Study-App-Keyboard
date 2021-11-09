@@ -16,7 +16,7 @@ export default class MouseTask extends Component {
 
         this.state = {
             modal: this.props.intro ? "modal is-active" : "modal",
-            inputValue: null,
+            inputClass: "input is-large is-link",
             textIsCorrect: true,
             numberOfTries: 0,
             passwordSubmission: false,
@@ -38,33 +38,54 @@ export default class MouseTask extends Component {
 
     }
 
+    componentDidMount() {
+        // focus the input field if the task has no intro (if the ref would be focused while the modal is active,
+        // it might cause problems
+        if (!this.props.intro) {
+            this.inputRef.current.focus();
+        }
+    }
+
+    // check if the task window size changes (when persons drag the task window to a smaller screen or change the screen
+    // size)
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.taskWindowSize !== this.props.taskWindowSize) {
             this.setState({ taskWindowSize: Math.floor(this.props.taskWindowSize * 0.66) });
         }
     }
 
-    handleChange(e) {
-        this.setState({inputValue: e.target.value}, ()=> {console.log(this.state.inputValue)})
+    // close the modal when the close modal button is pushed and focus the input ref
+    closeModal() {
+        document.body.classList.remove("is-clipped");
+        this.setState({
+            modal: "modal"
+        }, () => {this.inputRef.current.focus()});
     }
 
     checkIfEqual(event) {
 
         event.preventDefault();
         // get the value and length of the written text in the text field
-        let writtenText = this.state.inputValue;
+        let writtenText = this.inputRef.current.value;
 
-        this.setState({textIsCorrect: true, passwordSubmission: true}, () => {
+        // set a loading state to the input field for a few seconds to signal that the input is processed
+        this.setState({textIsCorrect: true, passwordSubmission: true, inputClass: "input is-large is-link"}, () => {
 
             setTimeout(() => {
+                // if the password is correct, end the task
                 if (writtenText === this.password) {
                     this.endTask()
                 } else {
-                    // if the typed in password was wrong, show an error message
+                    // if the typed in password was wrong, show an error message, clear the input field and focus it
                     this.setState({
                         textIsCorrect: false,
                         numberOfTries : this.state.numberOfTries + 1,
-                        passwordSubmission: false
+                        passwordSubmission: false,
+                        inputClass: "input is-large is-danger"
+                    }, () => {
+                        // empty and focus the input field
+                        this.inputRef.current.focus();
+                        this.inputRef.current.value = "";
                     })
                 }
 
@@ -72,10 +93,20 @@ export default class MouseTask extends Component {
         })
     }
 
+    // prevent clicking inside the input field
+    preventClicking(e) {
+        e.preventDefault();
+    }
+
+    // prevent that the focus is changed away from the input field
+    preventFocusChange() {
+        setTimeout(() => {
+            this.inputRef.current.focus()
+        }, 20)
+    }
+
+    // end the task and send the typing data into the parent component
     endTask() {
-
-        console.log(this.typingData);
-
         this.props.endTask({
             typingData: this.typingData,
         });
@@ -85,8 +116,6 @@ export default class MouseTask extends Component {
     // add the info about which circle was clicked last to the data: keep the string as short as possible to save data
     onKeyboardEvent(datapoint) {
 
-        console.log(datapoint);
-
         const taskInfo = {
             cor: this.state.numberOfTries
         }
@@ -94,12 +123,6 @@ export default class MouseTask extends Component {
         Object.assign(datapoint, taskInfo);
 
         this.typingData.push(datapoint);
-    }
-
-    // prevent clicking inside the input field
-    preventClicking(e) {
-        e.preventDefault();
-        this.inputRef.current.focus();
     }
 
 
@@ -112,7 +135,7 @@ export default class MouseTask extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>Schritt 2: Vorschau der Aufgabe</b></p>
+                        <p className="modal-card-title"><b>Schritt 3: Vorschau der Aufgabe</b></p>
                     </header>
                     <section className="modal-card-body">
                         <div>
@@ -136,14 +159,6 @@ export default class MouseTask extends Component {
                 </div>
             </div>
         )
-    }
-
-    // close the modal when the close modal button is pushed
-    closeModal() {
-        document.body.classList.remove("is-clipped");
-        this.setState({
-            modal: "modal"
-        });
     }
 
 
@@ -170,12 +185,11 @@ export default class MouseTask extends Component {
                             }}>{this.password}</label>
                             <form onSubmit={(e) => this.checkIfEqual(e)}>
                                 <div className={this.state.passwordSubmission ? "control is-large is-loading" : "control is large"}>
-                                    <input className={ this.state.passwordSubmission ? "input is-large is-link" :
-                                        this.state.textIsCorrect ? "input is-large is-link" : "input is-large is-danger"}
+                                    <input className={this.state.inputClass}
                                            type="password"
                                            ref={this.inputRef}
-                                           onChange={(event) => this.handleChange(event)}
                                            onMouseDown={(event) => this.preventClicking(event)}
+                                           onBlur={(event) => this.preventFocusChange(event)}
                                            spellCheck={false}
                                            disabled={this.state.passwordSubmission}
                                     />

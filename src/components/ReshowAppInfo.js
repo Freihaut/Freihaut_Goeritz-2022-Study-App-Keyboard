@@ -25,15 +25,15 @@ export default class ReshowAppInfo extends Component {
     renderTutorialPage(state) {
 
         if (state === "infoPage") {
-            return (<AppStartPage tutorial={false} endCurrentPage={() => this.switchPage("task")}/>)
-        } else if (state === "task") {
-            return (<KeyboardTask intro={true}
-                               endTask={() => this.switchPage("selfReport")}
-                               taskWindowSize={this.props.taskWindowSize}/>)
+            return (<AppStartPage tutorial={false} endCurrentPage={() => this.switchPage("selfReport")}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
-                                buttonText={"Fenster schließen"}
-                                endReport={() => ipcRenderer.send("close")}/>)
+                                buttonText={"Weiter"}
+                                endReport={() => this.switchPage("task")}/>)
+        } else if (state === "task") {
+            return (<KeyboardTask intro={true}
+                               endTask={() => ipcRenderer.send("close")}
+                               taskWindowSize={this.props.taskWindowSize}/>)
         }
     }
 

@@ -270,7 +270,7 @@ export default class App extends Component {
                             this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
                                                                         taskWindowSize={this.state.taskWindowSize} /> :
                                 this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
-                                    this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.dataSaveId} />
+                                    this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.parID} />
                                         : null
                         : null
                 }

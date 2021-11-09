@@ -63,7 +63,7 @@ export default class SelfReport extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>Schritt 3: Vorschau der Fragen</b></p>
+                        <p className="modal-card-title"><b>Schritt 2: Vorschau der Fragen</b></p>
                     </header>
                     <section className="modal-card-body">
 
