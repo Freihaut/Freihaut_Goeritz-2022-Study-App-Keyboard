@@ -3,7 +3,6 @@ Reshows the Tutorial when the participant clicks on the option in the system Tra
  */
 
 import React, { Component } from 'react';
-const {ipcRenderer} = require("electron");
 
 import SelfReport from "./SelfReport";
 import KeyboardTask from "./KeyboardTask";
@@ -32,7 +31,7 @@ export default class ReshowAppInfo extends Component {
                                 endReport={() => this.switchPage("task")}/>)
         } else if (state === "task") {
             return (<KeyboardTask intro={true}
-                               endTask={() => ipcRenderer.send("close")}
+                               endTask={() => this.switchPage("infoPage")}
                                taskWindowSize={this.props.taskWindowSize}/>)
         }
     }

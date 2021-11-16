@@ -111,7 +111,7 @@ export default class App extends Component {
 
                 // if the user reached the end page, save that the user finished the study
                 if (this.state.page === "studyEnd") {
-                    firebase.database().ref("userData/" + user.uid).update({ "finishedStudy": true })
+                    firebase.database().ref("studyData/" + user.uid).update({ "finishedStudy": true })
                 }
 
             } else {
@@ -142,7 +142,13 @@ export default class App extends Component {
     languageSelected(lang) {
 
         // save the language in the local storage and set the state to the selected language
-        this.setState({language: lang}, ()=> {window.localStorage.setItem("language", lang)});
+        // send the selected language into the main process to change the menu texts
+        this.setState({language: lang}, ()=> {
+            // save the language in the local storage
+            window.localStorage.setItem("language", lang);
+            // send the selected language to the main process
+            ipcRenderer.send("languageSelected", lang)
+        });
 
     }
 
@@ -265,11 +271,20 @@ export default class App extends Component {
         return (
 
             <div>
-                {/*<nav className="navbar is-fixed-bottom">
-                    <a className="navbar-item" onClick={() => this.setPage("start")}>
-                        Go to Debug Page
-                    </a>
-                </nav>*/}
+                {<nav className="navbar is-fixed-bottom">
+                    <div className={'navbar-brand'}>
+                        <div className={'navbar-item'}>
+                            <div className="control">
+                                <div className="select is-small">
+                                    <select onChange={(e) => {this.languageSelected(e.target.value)}}>
+                                        <option value={"german"} selected={this.state.language === "german"}>Deutsch</option>
+                                        <option value={"english"} selected={this.state.language === "english"}>English</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>}
                 {
                     /*this.state.page === "start" ? this.renderStartPage() : */
                     /* Show a blank screen until it is decided if the user is logged in, if the user is logged in

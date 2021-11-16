@@ -52,7 +52,7 @@ export default class DataGrabber extends Component {
                             :
                             this.state.phase === "selfReport" ? <SelfReport intro={false}
                                                                             buttonText={"Weiter"}
-                                                                            endReport={(e) => this.endGrabber(e)}
+                                                                            endReport={(e) => this.endSelfReport(e)}
                                                                             zoom={this.props.zoom}/>
                                 : null}
                 </div>

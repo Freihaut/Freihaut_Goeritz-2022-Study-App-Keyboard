@@ -13,12 +13,9 @@ import CloseSymbolImage from "./base64Images/CloseSymbol";
 
 export default function AppStartPage (props) {
 
-    // scroll to the top of the page
-    window.scrollTo(0, 0);
-
 
    return(
-       <div className="section" style={{marginTop: "1.5rem"}}>
+       <div className="section" style={{marginTop: "1.5rem", marginBottom: "1rem"}}>
            <div className={"content"}>
                {props.tutorial ?
                    <div>

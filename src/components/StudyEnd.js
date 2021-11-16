@@ -8,9 +8,6 @@ import {ipcRenderer, shell} from "electron";
 
 export default function StudyEnd (props) {
 
-    // scroll to the top of the page
-    window.scrollTo(0, 0);
-
     return(
 
         <div style={{display: "flex", alignItems: "center", height: "100vh"}}>

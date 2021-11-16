@@ -9,11 +9,6 @@ export default class Soziodemographics extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    componentDidMount() {
-        window.scrollTo(0, 0);
-    }
-
-
     handleInputChange(event) {
         // Get the name and value of the clicked radio button and save it to the corresponding question state
         const target = event.target;
@@ -35,7 +30,7 @@ export default class Soziodemographics extends Component {
     render() {
 
         return(
-            <div className="section" style={{marginTop: "1.5rem"}}>
+            <div className="section" style={{marginTop: "1.5rem", marginBottom: "1rem"}}>
                 <div className={"content"}>
                         <h4>Schritt 4: Einführung abschließen und Studie starten</h4>
                         <p>

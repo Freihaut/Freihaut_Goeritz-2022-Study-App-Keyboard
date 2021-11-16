@@ -31,6 +31,13 @@ let tray = null;
 // TODO: Set a hard coded study end date
 const studyEndDate = new Date(2021, 11, 27);
 
+// hard code the study language
+// --> this is a pragmatic solution to easily create an english or a german version of the study-app. It certainly
+// is not good practice, does not scale at all and requires building an app per language. The solution was chosen,
+// because I had troubles implementing a solution that dynamically updates (and saves) language settings in the main
+// process --> change the tray menu, app-name etc...
+const studyLanguage = "german"
+
 // function to create the main app window in which the app is shown
 const createWindow = (appPage) => {
 
@@ -117,8 +124,9 @@ const createWindow = (appPage) => {
     // if it the browser window is the logger
     if (appPage === "logger") {
       // send a windows notification that the logger started
-      const notificationTitle = "Studien-App Datenerhebung";
-      const notificationBody = "Die Studien-App hat ein Fenster zur Datenerhebung geöffnet. Herzlichen Dank für Ihre Teilnahme!"
+      let notificationTitle = studyLanguage === "german" ? "Studien-App Datenerhebung" : "Study-App Data Collection";
+      let notificationBody = studyLanguage === "german" ? "Die Studien-App hat ein Fenster zur Datenerhebung geöffnet. Herzlichen Dank für Ihre Teilnahme!"
+          : "The Study-App opened a data collection window. Thank you for your participation!";
 
       new Notification({title: notificationTitle,
         body: notificationBody,
@@ -128,7 +136,7 @@ const createWindow = (appPage) => {
   })
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // conditionally add event listeners to the Browser window instance
   if (appPage === "logger") {
@@ -155,11 +163,12 @@ const createWindow = (appPage) => {
           mainWindow,
           {
             type: 'question',
-            buttons: ['Studieneinführung weiterführen', 'Studieneinführung beenden'],
-            title: 'Abbruch der Studieneinführung',
-            message: 'Um die Studie zu beginnen, müssen Sie die Studieneinführung abschließen. Falls Sie dieses Fenster' +
+            buttons: studyLanguage === "german" ? ['Studieneinführung weiterführen', 'Studieneinführung beenden'] : ['Continue the Tutorial', 'Terminate the Tutorial'],
+            title: studyLanguage === "german" ? 'Abbruch der Studieneinführung': "Tutorial Termination",
+            message: studyLanguage === "german" ? 'Um die Studie zu beginnen, müssen Sie die Studieneinführung abschließen. Falls Sie dieses Fenster' +
               ' schließen, brechen Sie die Studieneinführung ab und beenden die Studien-App. Wollen Sie die Studieneinführung ' +
-              'wirklich abbrechen und die Studien-App beenden?'
+              'wirklich abbrechen und die Studien-App beenden?' : "You need to finish the tutorial in order to start the study. If you close this window," +
+                "you will terminate the tutorial and close the Study-App. Do you really want to close this window?"
           });
 
         if (message === 1) {
@@ -235,7 +244,7 @@ const createSideWindow = (appPage) => {
   // load the entrypoint index.html of the app
   sideWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  //sideWindow.webContents.openDevTools();
+  sideWindow.webContents.openDevTools();
 
   // send a message to the page to load the correct component and show the main window after it finished loading
   // in the electron docs, ready-to-show is recommended for showing the main window, but IPC communication to the
@@ -313,9 +322,9 @@ if (!gotTheLock) {
 
     const contextMenu = Menu.buildFromTemplate([
       // option to quit the app
-      { label: "Studien-App beenden", click: () => { app.quit() } },
+      { label: studyLanguage === "german" ? "Studien-App beenden" : "Close the Study-App", click: () => { app.quit() } },
       // option to show the task tutorial again (only allows to open the window once
-      { label: "Studien-App Informationen anzeigen", click: () => { if (!sideWindow) {createSideWindow("reshowTut")} } },
+      { label: studyLanguage === "german" ? "Studien-App Informationen anzeigen" : "Show Study-App information", click: () => { if (!sideWindow) {createSideWindow("reshowTut")} } },
       // option to show the study information page
     ]);
     tray.setToolTip("Studien-App");
@@ -337,8 +346,8 @@ if (!gotTheLock) {
           endStudy();
         } else {
           if (hasKey) {
-            // TODO: start the logger after 10 seconds (very shortly after the computer started with a short delay)
-            startLogger(10 * 1000);
+            // TODO: start the logger after 5 seconds (very shortly after the computer started with a short delay)
+            startLogger(5 * 1000);
           } else {
             // start the tutorial
             createWindow("tutorial");
@@ -398,22 +407,26 @@ ipcMain.on("tutorialEnd", () => {
 })
 
 
-// start to log mouse data in the main process for xx minutes and trigger an create Logger window event after another
-// xx minutes
-const startLogger = () => {
+// open the data collection window (typing logger) after a set delay
+const startLogger = (timeDelay) => {
 
-  // check if the startTime of the Browser window creation is after the time limit of the study (14 days)
-  dataStorage.get("s", (err, data) => {
-    // if the start time is older than xx days (length of the study), show the study end page
-    //TODO: Set an end time of the study (12096e5 = in 2 weeks / + 14 days)
-    if (Date.now() > data.d + 12096e5) {
-      // end the study if the study time is over
-      endStudy();
-    } else {
-      // start the logger
-      createWindow("logger");
-    }
-  });
+  // set the timeout after which the logger window is created (e.g. 1 hour after the previous logging was closed)
+  setTimeout(() => {
+        // check if the startTime of the Browser window creation is after the time limit of the study (14 days)
+        dataStorage.get("s", (err, data) => {
+          // if the start time is older than xx days (length of the study), show the study end page
+          //TODO: Set an end time of the study (12096e5 = in 2 weeks / + 14 days)
+          if (Date.now() < data.d + 12096e5) {
+            // end the study if the study time is over
+            endStudy();
+          } else {
+            // start the logger
+            createWindow("logger");
+          }
+        });
+
+      }, timeDelay
+  )
 }
 
 // function to end the study
