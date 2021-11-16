@@ -36,7 +36,7 @@ const studyEndDate = new Date(2021, 11, 27);
 // is not good practice, does not scale at all and requires building an app per language. The solution was chosen,
 // because I had troubles implementing a solution that dynamically updates (and saves) language settings in the main
 // process --> change the tray menu, app-name etc...
-const studyLanguage = "german"
+const studyLanguage = "english";
 
 // function to create the main app window in which the app is shown
 const createWindow = (appPage) => {
@@ -89,7 +89,7 @@ const createWindow = (appPage) => {
   // main window does not work with "ready-to-show"
   mainWindow.webContents.on("did-finish-load", () => {
     // send the info about which page to render and the infos about the screen (how the window is displayed on the screen)
-    mainWindow.webContents.send("appPageToRender", appPage, {zoom: zoomFactor,
+    mainWindow.webContents.send("appPageToRender", appPage, studyLanguage, {zoom: zoomFactor,
       screenSize: screenSize, windBounds: windowBounds, windOnDisp: windowOnDisplay});
     // show the window
     mainWindow.showInactive();
@@ -251,7 +251,7 @@ const createSideWindow = (appPage) => {
   // main window does not work with "ready-to-show"
   sideWindow.webContents.on("did-finish-load", () => {
     // send the info about which page to render and the infos about the screen (how the window is displayed on the screen)
-    sideWindow.webContents.send("appPageToRender", appPage, {
+    sideWindow.webContents.send("appPageToRender", appPage, studyLanguage, {
       zoom: zoomFactor,
       screenSize: screenSize, windBounds: windowBounds, windOnDisp: null
     });
@@ -322,9 +322,9 @@ if (!gotTheLock) {
 
     const contextMenu = Menu.buildFromTemplate([
       // option to quit the app
-      { label: studyLanguage === "german" ? "Studien-App beenden" : "Close the Study-App", click: () => { app.quit() } },
+      { label: studyLanguage === "german" ? "Study-App beenden" : "Quit the Study-App", click: () => { app.quit() } },
       // option to show the task tutorial again (only allows to open the window once
-      { label: studyLanguage === "german" ? "Studien-App Informationen anzeigen" : "Show Study-App information", click: () => { if (!sideWindow) {createSideWindow("reshowTut")} } },
+      { label: studyLanguage === "german" ? "Study-App Informationen anzeigen" : "Show Study-App information", click: () => { if (!sideWindow) {createSideWindow("reshowTut")} } },
       // option to show the study information page
     ]);
     tray.setToolTip("Studien-App");
@@ -416,7 +416,7 @@ const startLogger = (timeDelay) => {
         dataStorage.get("s", (err, data) => {
           // if the start time is older than xx days (length of the study), show the study end page
           //TODO: Set an end time of the study (12096e5 = in 2 weeks / + 14 days)
-          if (Date.now() < data.d + 12096e5) {
+          if (Date.now() > data.d + 12096e5) {
             // end the study if the study time is over
             endStudy();
           } else {

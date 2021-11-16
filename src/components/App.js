@@ -11,7 +11,6 @@ import Tutorial from "./Tutorial";
 import DataGrabber from "./DataGrabber";
 import ReshowAppInfo from "./ReshowAppInfo"
 import StudyEnd from "./StudyEnd";
-import LanguageSelection from "./LanguageSelection";
 
 export default class App extends Component {
 
@@ -49,14 +48,15 @@ export default class App extends Component {
             online: false,
             parID: participantID,
             taskWindowSize: null,
-            language: window.localStorage.getItem('language')
+            language: null
         }
 
-        // listen to the message from the main process that tells the renderer process which page to load and
-        // which windows zoom level the participant uses (in addition to other screen related infos) and the user Id for the end of the study
-        ipcRenderer.once("appPageToRender", (event, page, displayInfo) => {
+        // listen to the message from the main process that tells the renderer process which page to load, the
+        // language of the app and which windows zoom level the participant uses
+        // (in addition to other screen related infos) and the user Id for the end of the study
+        ipcRenderer.once("appPageToRender", (event, page, language, displayInfo) => {
             this.displayInfo = displayInfo;
-            this.setState({ page: page, taskWindowSize: displayInfo.windBounds.width });
+            this.setState({ page: page, language: language, taskWindowSize: displayInfo.windBounds.width });
         })
 
         // listens to a resize event of the browser window and chnaged the mouse task size + additionally logs the
@@ -138,27 +138,14 @@ export default class App extends Component {
         });
     }
 
-    // handle language selection before the user starts the study
-    languageSelected(lang) {
-
-        // save the language in the local storage and set the state to the selected language
-        // send the selected language into the main process to change the menu texts
-        this.setState({language: lang}, ()=> {
-            // save the language in the local storage
-            window.localStorage.setItem("language", lang);
-            // send the selected language to the main process
-            ipcRenderer.send("languageSelected", lang)
-        });
-
-    }
-
     // Define functions that do the data handling when the user is done with the tutorial or data logger
 
     // end of tutorial (when the user finishes the tutorial, save the sociodemographic data and "start" the data logging
     endTutorial(tutData) {
 
         // add the version number to the tut data to keep track of potential changes in the study app version
-        const studyStartData = { ...tutData, ...{ appVersion: "Test_KeyboardLogger" }, ...{ "os": process.platform } }
+        //TODO: Change the app Version based on the app-language
+        const studyStartData = { ...tutData, ...{ appVersion: "KeyboardStudy_ger" }, ...{ "os": process.platform } }
 
         // get the tutorial data (sociodemographics) and send them to firebase when the tutorial is done
         // check if the user logged into firebase and check if the user is online or offline
@@ -271,35 +258,22 @@ export default class App extends Component {
         return (
 
             <div>
-                {<nav className="navbar is-fixed-bottom">
-                    <div className={'navbar-brand'}>
-                        <div className={'navbar-item'}>
-                            <div className="control">
-                                <div className="select is-small">
-                                    <select onChange={(e) => {this.languageSelected(e.target.value)}}>
-                                        <option value={"german"} selected={this.state.language === "german"}>Deutsch</option>
-                                        <option value={"english"} selected={this.state.language === "english"}>English</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </nav>}
                 {
                     /*this.state.page === "start" ? this.renderStartPage() : */
-                    /* Show a blank screen until it is decided if the user is logged in, if the user is logged in
-                    * show the study page, else show the login screen */
+                    /* Show a blank screen until it is decided if the user is logged in */
                     this.state.userId ?
-                        // if no language has been chosen, show the language selection page
-                        !this.state.language ? <LanguageSelection languageSelected={(language) => {this.languageSelected(language)}}/> :
-                            // else show the study page
-                            this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
-                                                                       taskWindowSize={this.state.taskWindowSize} /> :
-                                this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
-                                                                            taskWindowSize={this.state.taskWindowSize} /> :
-                                    this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize} /> :
-                                        this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.parID} />
-                                            : null
+                        // else show the study page
+                        this.state.page === "tutorial" ? <Tutorial endTutorial={(data) => this.endTutorial(data)}
+                                                                   taskWindowSize={this.state.taskWindowSize}
+                                                                   language={this.state.language}/> :
+                            this.state.page === "logger" ? <DataGrabber endDataGrabber={(data) => this.endDataGrabber(data)}
+                                                                        taskWindowSize={this.state.taskWindowSize}
+                                                                        language={this.state.language}/> :
+                                this.state.page === "reshowTut" ? <ReshowAppInfo taskWindowSize={this.state.taskWindowSize}
+                                                                                 language={this.state.language}/> :
+                                    this.state.page === "studyEnd" ? <StudyEnd participantId={this.state.parID}
+                                                                               language={this.state.language}/>
+                                        : null
                         : null
                 }
             </div>

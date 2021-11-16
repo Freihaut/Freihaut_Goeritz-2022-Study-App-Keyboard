@@ -1,8 +1,8 @@
 {
-  "name": "Studien-App",
-  "productName": "Studien-App",
-  "version": "1.0.0",
-  "description": "Studien-App by Paul Freihaut, Wirtschaftspsychologie, Universität Freiburg",
+  "name": "Study-App",
+  "productName": "Study-App",
+  "version": "1.0",
+  "description": "Study-App by Paul Freihaut, Wirtschaftspsychologie, Universität Freiburg",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -12,13 +12,13 @@
   },
   "keywords": [],
   "author": {
-    "name": "Studien-App/Paul Freihaut",
+    "name": "Study-App/Paul Freihaut",
     "email": "paul.freihaut@psychologie.uni-freiburg.de"
   },
   "license": "MIT",
   "build": {
     "appId": "freihaut.studien-app",
-    "productName": "Studien-App",
+    "productName": "Study-App",
     "afterSign": "./afterSignHook.js",
     "win": {
       "target": "nsis",

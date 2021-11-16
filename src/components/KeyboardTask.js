@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 // import the mouse Tracker
 import KeyboardTracker from "./KeyboardTracker";
 
-// import the mouse task image
-import MouseTaskImage from "./base64Images/MouseTaskImage";
 
 export default class MouseTask extends Component {
 
@@ -135,26 +133,51 @@ export default class MouseTask extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>Schritt 3: Vorschau der Aufgabe</b></p>
+                        <p className="modal-card-title"><b>
+                            {this.props.language === "german" ?
+                                "Schritt 3: Vorschau der Aufgabe"
+                                :
+                                "Schritt 3: Preview of the Task"
+                            }
+                        </b></p>
                     </header>
                     <section className="modal-card-body">
-                        <div>
-                            <p>
-                                Der Abschluss jeder Datenerhebung ist die Aufgabe, einen vorgegebenes Passwort
-                                in ein Textfeld abzuschreiben.
-                            </p>
-                            <br />
-                            <p>
-                                Bestätigen Sie die Eingabe durch Drücken der Enter Taste. Falls Sie das Passwort
-                                falsch abgeschrieben haben, wird Ihnen dies angezeigt. Die Aufgabe endet sobald
-                                Sie das Passwort korrekt abgeschrieben haben.
-                            </p>
-                            <br />
-                        </div>
-
+                        {this.props.language === "german" ?
+                            <div className={"content"}>
+                                <p>
+                                    Der Abschluss jeder Datenerhebung ist die Aufgabe, ein vorgegebenes Passwort
+                                    in ein Textfeld abzuschreiben.
+                                </p>
+                                <p>
+                                    Bestätigen Sie die Eingabe durch Drücken der Enter Taste. Falls Sie das Passwort
+                                    falsch abgeschrieben haben, wird Ihnen dies angezeigt. Die Aufgabe endet sobald
+                                    Sie das Passwort korrekt abgeschrieben haben und Ihre Eingabe mit Enter bestätigt haben.
+                                </p>
+                                <p>
+                                    Mit dem Ende der Aufgabe schließt sich das Fenster zur Datenerhebung automatisch.
+                                </p>
+                            </div>
+                            :
+                            <div className={"content"}>
+                                <p>
+                                   At the end of each data collection, you have the task to type in a given password
+                                    into an input field.
+                                </p>
+                                <p>
+                                    Please press the "Enter" key to confirm your entry. If you have typed the password
+                                    incorrectly, you will be notified. The task ends as soon as you have typed the password correctly
+                                    and pressed enter to confirm your entry.
+                                </p>
+                                <p>
+                                    After the task, the data collection window will close automatically.
+                                </p>
+                            </div>
+                        }
                     </section>
                     <footer className="modal-card-foot">
-                        <button className={"button is-link"} onClick={() => this.closeModal()}>Aufgabe starten</button>
+                        <button className={"button is-link"} onClick={() => this.closeModal()}>
+                            {this.props.language === "german" ? "Aufgabe starten" : "Start Task"}
+                        </button>
                     </footer>
                 </div>
             </div>
@@ -170,33 +193,57 @@ export default class MouseTask extends Component {
                 <div className="card" style={{ width: this.state.taskWindowSize}}>
                     <header className="card-header">
                         <p className="card-header-title">
-                            Bitte geben Sie das Passwort ein und bestätigen Sie Ihre Eingabe
-                            durch das Drücken der Enter-Taste
+                            {this.props.language === "german" ?
+                                "Bitte geben Sie das Passwort ein und bestätigen Sie Ihre Eingabe durch das Drücken der Enter-Taste"
+                                :
+                                "Please type the displayed password into the input field and press enter to confirm your entry"
+                            }
                         </p>
                     </header>
-                    <div className="card-content" style={{margin: "3rem"}}>
+                    <div className="card-content" style={{margin: "2.5rem"}}>
+                        <div className="field">
+                            <label className="label is-large">
+                                {this.props.language === "german" ?
+                                    "Ihr Passwort"
+                                    :
+                                    "Your Password"
+                                }
+                            </label>
+                            <div className="control is-large">
+                                <input className="input is-large" type="text" value={this.password} disabled={true}/>
+                            </div>
+                        </div>
                         <div className="field">
                             <label className="label is-large" style={{
-                                  WebkitUserSelect: "none",
-                                  MozUserSelect: "none",
-                                  msUserSelect: "none",
-                                  UserSelect: "none",
-                                  marginBottom: "2rem"
-                            }}>{this.password}</label>
+                                WebkitUserSelect: "none",
+                                MozUserSelect: "none",
+                                msUserSelect: "none",
+                                UserSelect: "none"}}>
+                                {this.props.language === "german" ?
+                                    "Passwort Eingabe"
+                                    :
+                                    "Password Entry"
+                                }
+                            </label>
                             <form onSubmit={(e) => this.checkIfEqual(e)}>
-                                <div className={this.state.passwordSubmission ? "control is-large is-loading" : "control is large"}>
+                                <div className={this.state.passwordSubmission ? "control is-large is-loading" : "control is-large"}>
                                     <input className={this.state.inputClass}
                                            type="password"
                                            ref={this.inputRef}
                                            onMouseDown={(event) => this.preventClicking(event)}
                                            onBlur={(event) => this.preventFocusChange(event)}
+                                           placeholder={this.props.language === "german" ? "Geben Sie Ihr Passwort ein" : "Please enter your password"}
                                            spellCheck={false}
                                            disabled={this.state.passwordSubmission}
                                     />
                                 </div>
                                 <p className="help is-large is-danger"
                                    style={{visibility: this.state.textIsCorrect ? "hidden" : "visible"}}>
-                                    Das von Ihnen eingegebene Passwort ist inkorrekt
+                                    {this.props.language === "german" ?
+                                        "Das von Ihnen eingegebene Passwort ist inkorrekt"
+                                        :
+                                        "The entered password is incorrect"
+                                    }
                                 </p>
                             </form>
                         </div>

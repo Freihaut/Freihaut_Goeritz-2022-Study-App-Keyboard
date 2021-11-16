@@ -22,7 +22,7 @@ export default class Tutorial extends Component {
             socioDemographics: {
                 age: -99,
                 sex: -99,
-                hand: -99,
+                nationality: -99,
             }
         }
     }
@@ -55,20 +55,23 @@ export default class Tutorial extends Component {
     renderTutorialPage(state) {
 
         if (state === "welcome") {
-            return (<AppStartPage tutorial={true} endCurrentPage={() => this.switchPage("selfReport")}/>)
+            return (<AppStartPage tutorial={true} endCurrentPage={() => this.switchPage("selfReport")}
+                                  language={this.props.language}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
-                                buttonText={"Weiter"}
-                                endReport={() => this.switchPage("task")}/>)
+                                endReport={() => this.switchPage("task")}
+                                language={this.props.language}/>)
         } else if (state === "task") {
             return (<KeyboardTask intro={true}
-                               endTask={() => this.switchPage("sociodem")}
-                               taskWindowSize={this.props.taskWindowSize}/>)
+                                  endTask={() => this.switchPage("sociodem")}
+                                  taskWindowSize={this.props.taskWindowSize}
+                                  language={this.props.language}/>)
         } else if (state === "sociodem") {
             return (<Sociodemographics answers={this.state.socioDemographics}
                                        hasEnded={this.state.hasEnded}
                                        inputChange={(data) => this.handleSocioDemInput(data)}
-                                       endSociodem={() => this.endTutorial()}/>)
+                                       endSociodem={() => this.endTutorial()}
+                                       language={this.props.language}/>)
         }
     }
 
@@ -83,22 +86,22 @@ export default class Tutorial extends Component {
                                     <ul>
                                         <li className={this.state.page === "welcome" ? "is-active" : ""}>
                                             <a onClick={() => this.state.hasEnded ? null : this.switchPage("welcome")}>
-                                                <span>1. Studien-App Infos</span>
+                                                <span>{this.props.language === "german" ? "1. Study-App Infos" : "1. Study-App Info"}</span>
                                             </a>
                                         </li>
                                         <li className={this.state.page === "selfReport" ? "is-active" : ""}>
                                             <a onClick={() => this.state.hasEnded ? null : this.switchPage("selfReport")}>
-                                                <span>2. Vorschau Fragen</span>
+                                                <span>{this.props.language === "german" ? "2. Vorschau Fragen" : "2. Questionnaire Preview"}</span>
                                             </a>
                                         </li>
                                         <li className={this.state.page === "task" ? "is-active" : ""}>
                                             <a onClick={() => this.state.hasEnded ? null : this.switchPage("task")}>
-                                                <span>3. Vorschau Aufgabe</span>
+                                                <span>{this.props.language === "german" ? "3. Vorschau Aufgabe" : "3. Task Preview"}</span>
                                             </a>
                                         </li>
                                         <li className={this.state.page === "sociodem" ? "is-active" : ""}>
                                             <a onClick={() => this.state.hasEnded ? null : this.switchPage("sociodem")}>
-                                                <span>4. Studienstart</span>
+                                                <span>{this.props.language === "german" ? "4. Studienstart" : "4. Study Start"}</span>
                                             </a>
                                         </li>
                                     </ul>

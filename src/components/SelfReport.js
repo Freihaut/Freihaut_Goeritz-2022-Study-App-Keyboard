@@ -63,23 +63,42 @@ export default class SelfReport extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>Schritt 2: Vorschau der Fragen</b></p>
+                        <p className="modal-card-title"><b>
+                            {this.props.language === "german" ?
+                                "Schritt 2: Vorschau der Fragen"
+                                :
+                                "Step 2: Preview of Questionnaire Items"
+                            }
+                        </b></p>
                     </header>
                     <section className="modal-card-body">
-
-                        <div className={"content"}>
-                            <p>
-                               Zu Beginn jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
-                                angezeigt.
-                            </p>
-                            <p>
-                                Beantworten Sie die Fragen spontan, es gibt keine richtigen oder falschen
-                                Antworten.
-                            </p>
-                        </div>
+                        {this.props.language === "german" ?
+                            <div className={"content"}>
+                                <p>
+                                    Zu Beginn jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
+                                    angezeigt.
+                                </p>
+                                <p>
+                                    Beantworten Sie die Fragen spontan, es gibt keine richtigen oder falschen
+                                    Antworten.
+                                </p>
+                            </div>
+                            :
+                            <div className={"content"}>
+                                <p>
+                                   At the beginning of each data collection, you will be asked 2 questions regarding your
+                                    current emotional state.
+                                </p>
+                                <p>
+                                    Please answer the questions intuitively, there are no right or wrong answers.
+                                </p>
+                            </div>
+                        }
                     </section>
                     <footer className="modal-card-foot">
-                        <button className={"button is-link"} onClick={() => this.closeModal()}>Fragen anzeigen</button>
+                        <button className={"button is-link"} onClick={() => this.closeModal()}>
+                            {this.props.language === "german" ? "Fragen anzeigen" : "Show questionnaire"}
+                        </button>
                     </footer>
                 </div>
             </div>
@@ -101,32 +120,36 @@ export default class SelfReport extends Component {
             <div className="container is-fluid" style={this.props.intro ? {marginTop: "3em"} : {}}>
                 <div>
                     <h3 className={"title is-5"}>
-                        Bitte verschieben Sie die blauen Regler so, dass sie Ihrem aktuellen Befinden am besten entsprechen.
+                        {this.props.language === "german" ?
+                            "Bitte verschieben Sie die blauen Regler so, dass sie Ihrem aktuellen Befinden am besten entsprechen."
+                            :
+                            "Please use the blue slider and select a value from the range along the bar that best suits your current emotional state."
+                        }
                     </h3>
                     <hr style={{margin: "0 0", height: "3px"}}/>
                 </div>
 
                 <div style={{marginTop: "2.5rem", textAlign: "center"}}>
-                    <p className={"title is-5"} style={{marginBottom: "4rem"}}>Ich fühle mich...</p>
+                    <p className={"title is-5"} style={{marginBottom: "4rem"}}>{this.props.language === "german" ? "Ich fühle mich..." : "I'm feeling..."}</p>
                     <input className={"slider"} step="1" min="0" max="100" name="valence" value={this.state.selfReport.valence} type="range" onChange={this.handleInputChange}/>
                     <ul className="slider-labels">
-                        <li className={"slider-start-label title is-5"}>negativ</li>
-                        <li className={"slider-end-label title is-5"}>positiv</li>
+                        <li className={"slider-start-label title is-5"}>{this.props.language === "german" ? "negativ" : "negative"}</li>
+                        <li className={"slider-end-label title is-5"}>{this.props.language === "german" ? "positiv" : "positive"}</li>
                     </ul>
                 </div>
 
                 <div style={{marginTop: "5.5rem"}}>
                     <input className={"slider"} step="1" min="0" max="100" name="arousal" value={this.state.selfReport.arousal} type="range" onChange={this.handleInputChange}/>
                     <ul className="slider-labels">
-                        <li className={"slider-start-label title is-5"}>aufgeregt</li>
-                        <li className={"slider-end-label title is-5"}>ruhig</li>
+                        <li className={"slider-start-label title is-5"}>{this.props.language === "german" ? "aufgeregt" : "excited"}</li>
+                        <li className={"slider-end-label title is-5"}>{this.props.language === "german" ? "ruhig" : "calm"}</li>
                     </ul>
                 </div>
 
                 <div style={{marginTop: "5rem", marginBottom: "1.5rem", width: "100%", textAlign: "center"}}>
                     <button className={this.state.hasEnded ? "button is-link is-loading" : "button is-link"}
                             disabled={this.state.hasEnded}
-                            onClick={() => this.endSelfReport()}>{this.props.buttonText}</button>
+                            onClick={() => this.endSelfReport()}>{this.props.language === "german" ? "Weiter" : "Continue"}</button>
                 </div>
                 {this.renderInstruction()}
             </div>

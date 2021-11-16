@@ -24,15 +24,17 @@ export default class ReshowAppInfo extends Component {
     renderTutorialPage(state) {
 
         if (state === "infoPage") {
-            return (<AppStartPage tutorial={false} endCurrentPage={() => this.switchPage("selfReport")}/>)
+            return (<AppStartPage tutorial={false} endCurrentPage={() => this.switchPage("selfReport")}
+                                  language={this.props.language}/>)
         } else if (state === "selfReport") {
             return (<SelfReport intro={true}
-                                buttonText={"Weiter"}
-                                endReport={() => this.switchPage("task")}/>)
+                                endReport={() => this.switchPage("task")}
+                                language={this.props.language}/>)
         } else if (state === "task") {
             return (<KeyboardTask intro={true}
-                               endTask={() => this.switchPage("infoPage")}
-                               taskWindowSize={this.props.taskWindowSize}/>)
+                                  endTask={() => this.switchPage("infoPage")}
+                                  taskWindowSize={this.props.taskWindowSize}
+                                  language={this.props.language}/>)
         }
     }
 
@@ -46,17 +48,17 @@ export default class ReshowAppInfo extends Component {
                             <ul>
                                 <li className={this.state.page === "infoPage" ? "is-active" : ""}>
                                     <a onClick={() => this.switchPage("infoPage")}>
-                                        <span>1. Studien-App Infos</span>
+                                        <span>{this.props.language === "german" ? "1. Study-App Infos" : "1. Study-App Info"}</span>
                                     </a>
                                 </li>
                                 <li className={this.state.page === "selfReport" ? "is-active" : ""}>
                                     <a onClick={() => this.switchPage("selfReport")}>
-                                        <span>2. Vorschau Fragen</span>
+                                        <span>{this.props.language === "german" ? "2. Vorschau Fragen" : "2. Question Preview"}</span>
                                     </a>
                                 </li>
                                 <li className={this.state.page === "task" ? "is-active" : ""}>
                                     <a onClick={() => this.switchPage("task")}>
-                                        <span>3. Vorschau Aufgabe</span>
+                                        <span>{this.props.language === "german" ? "3. Vorschau Aufgabe" : "3. Task Preview"}</span>
                                     </a>
                                 </li>
                             </ul>
