@@ -36,7 +36,7 @@ const studyEndDate = new Date(2021, 11, 27);
 // is not good practice, does not scale at all and requires building an app per language. The solution was chosen,
 // because I had troubles implementing a solution that dynamically updates (and saves) language settings in the main
 // process --> change the tray menu, app-name etc...
-const studyLanguage = "english";
+const studyLanguage = "german";
 
 // function to create the main app window in which the app is shown
 const createWindow = (appPage) => {

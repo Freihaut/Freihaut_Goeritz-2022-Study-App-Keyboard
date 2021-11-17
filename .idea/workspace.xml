@@ -4,19 +4,7 @@
     <list default="true" id="15cb016d-bb75-434f-8b3d-6048f6c933ef" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppStartPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppStartPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DataGrabber.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DataGrabber.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyboardTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyboardTask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LanguageSelection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ReshowAppInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ReshowAppInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SelfReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SelfReport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Sociodemographics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sociodemographics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/StudyEnd.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StudyEnd.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tutorial.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tutorial.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/base64Images/MouseTaskImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +42,9 @@
       <workItem from="1636447681570" duration="19373000" />
       <workItem from="1636627818639" duration="3308000" />
       <workItem from="1636971905681" duration="12183000" />
-      <workItem from="1637052955988" duration="17459000" />
+      <workItem from="1637052955988" duration="17512000" />
+      <workItem from="1637073908112" duration="17000" />
+      <workItem from="1637136506916" duration="1292000" />
     </task>
     <servers />
   </component>

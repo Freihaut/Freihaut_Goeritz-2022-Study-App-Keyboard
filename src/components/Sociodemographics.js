@@ -119,7 +119,7 @@ export default class Soziodemographics extends Component {
                 <div className={"field"} style={{marginTop: "25px"}}>
                         <label className="label">{this.props.language === "german" ? "Ihre Nationalität:" : "Your Nationality:"}</label>
                         <div className="control">
-                        <input className="input"
+                        <input className="input is-info"
                                style={{width: "350px"}}
                                name="nationality"
                                type="text"

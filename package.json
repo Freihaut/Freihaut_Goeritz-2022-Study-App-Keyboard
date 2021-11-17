@@ -1,7 +1,7 @@
 {
   "name": "Study-App",
   "productName": "Study-App",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Study-App by Paul Freihaut, Wirtschaftspsychologie, Universität Freiburg",
   "main": ".webpack/main",
   "scripts": {
