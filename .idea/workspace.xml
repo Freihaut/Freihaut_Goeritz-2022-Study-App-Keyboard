@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15cb016d-bb75-434f-8b3d-6048f6c933ef" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/base64Images/TutorialImage_Ger.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Sociodemographics.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sociodemographics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppStartPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppStartPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/base64Images/TutorialImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/base64Images/TutorialImage_Eng.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +25,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/base64Images" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Paul Freihaut\Documents\Code-Projects\LongStudy_Keyboard\src\components\base64Images" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,7 +50,9 @@
       <workItem from="1636971905681" duration="12183000" />
       <workItem from="1637052955988" duration="17512000" />
       <workItem from="1637073908112" duration="17000" />
-      <workItem from="1637136506916" duration="1292000" />
+      <workItem from="1637136506916" duration="3503000" />
+      <workItem from="1637155933891" duration="3165000" />
+      <workItem from="1637224399467" duration="1241000" />
     </task>
     <servers />
   </component>

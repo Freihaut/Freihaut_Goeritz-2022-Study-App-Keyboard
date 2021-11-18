@@ -327,7 +327,7 @@ if (!gotTheLock) {
       { label: studyLanguage === "german" ? "Study-App Informationen anzeigen" : "Show Study-App information", click: () => { if (!sideWindow) {createSideWindow("reshowTut")} } },
       // option to show the study information page
     ]);
-    tray.setToolTip("Studien-App");
+    tray.setToolTip("Study-App");
     tray.setContextMenu(contextMenu);
     tray.on("click", () => { tray.popUpContextMenu() })
 

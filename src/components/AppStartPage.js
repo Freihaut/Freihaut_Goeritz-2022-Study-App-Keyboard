@@ -3,8 +3,10 @@ This function component renders the start page of the app introduction when part
  */
 
 import React from 'react';
-// import the task-symbol image
-import TaskSymbolImage from "./base64Images/TutorialImage";
+// import the german intro image
+import IntroImageGer from "./base64Images/TutorialImage_Ger";
+//import the english intro image
+import IntroImageEng from './base64Images/TutorialImage_Eng'
 // import the App Symbol Image
 import AppSymbolImage from "./base64Images/AppSymbolImage";
 // import the close Symbol Image
@@ -57,7 +59,7 @@ export default function AppStartPage (props) {
                            </p>
 
                            <figure className="image">
-                               <img src={TaskSymbolImage} style={{"border": "1px solid black", "borderTopStyle": "none",
+                               <img src={IntroImageGer} style={{"border": "1px solid black", "borderTopStyle": "none",
                                    "borderBottomStyle": "none"}}/>
                                <figcaption>
                                    Das Study-App Symbol in Ihrer {process.platform === "darwin" ? "Menüleiste" : "Systemleiste"} zeigt, dass die Study-App gestartet ist. Durch Klicken auf das Study-App
@@ -140,7 +142,7 @@ export default function AppStartPage (props) {
                            </p>
 
                            <figure className="image">
-                               <img src={TaskSymbolImage} style={{"border": "1px solid black", "borderTopStyle": "none",
+                               <img src={IntroImageEng} style={{"border": "1px solid black", "borderTopStyle": "none",
                                    "borderBottomStyle": "none"}}/>
                                <figcaption>
                                    The Study-App icon in the taskbar indicates that the Study-App is running. By clicking
