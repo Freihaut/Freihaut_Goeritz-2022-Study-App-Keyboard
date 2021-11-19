@@ -33,7 +33,7 @@ export default class Soziodemographics extends Component {
             <div className="section" style={{marginTop: "1.5rem"}}>
                 {this.props.language === "german" ?
                     <div className={"content"}>
-                        <h4>Step 4: Einführung abschließen und Studie starten</h4>
+                        <h4>Schritt 4: Einführung abschließen und Studie starten</h4>
                         <p>
                             Sie sind am Ende der Einführung in die Studien-App angekommen. Machen Sie abschließend bitte noch
                             einige Angaben zu Ihrer Person und bestätigen Sie dann, dass Sie die Studie starten möchten.
@@ -42,7 +42,6 @@ export default class Soziodemographics extends Component {
                             Wenn Sie auf "Studie starten" klicken, schließt sich dieses Fenster und die Studien-App
                             bleibt passiv im Hintergrund, bis sie nach etwa 60 Minuten ein Fenster zur ersten Datenerhebung öffnet.
                         </p>
-
                         <hr/>
                     </div>
                     :
@@ -56,7 +55,6 @@ export default class Soziodemographics extends Component {
                             If you click “Start study”, this window will be closed and the Study-App will sleep until
                             it launches a new window for the first data collection after about 60 minutes.
                         </p>
-
                         <hr/>
                     </div>
                 }

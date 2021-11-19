@@ -142,9 +142,9 @@ export default class MouseTask extends Component {
                     <header className="modal-card-head">
                         <p className="modal-card-title"><b>
                             {this.props.language === "german" ?
-                                "Schritt 3: Vorschau der Aufgabe"
+                                "Schritt 2: Vorschau der Aufgabe"
                                 :
-                                "Schritt 3: Preview of the Task"
+                                "Step 2: Preview of the Task"
                             }
                         </b></p>
                     </header>
@@ -152,7 +152,7 @@ export default class MouseTask extends Component {
                         {this.props.language === "german" ?
                             <div className={"content"}>
                                 <p>
-                                    Der Abschluss jeder Datenerhebung ist die Aufgabe, ein vorgegebenes Passwort
+                                    Jede Datenerhebung beginnt mit der Aufgabe, ein vorgegebenes Passwort
                                     in ein Textfeld abzuschreiben.
                                 </p>
                                 <p>
@@ -165,14 +165,11 @@ export default class MouseTask extends Component {
                                     falsch abgeschrieben haben, wird Ihnen dies angezeigt. Die Aufgabe endet sobald
                                     Sie das Passwort korrekt abgeschrieben haben und Ihre Eingabe mit Enter bestätigt haben.
                                 </p>
-                                <p>
-                                    Mit dem Ende der Aufgabe schließt sich das Fenster zur Datenerhebung automatisch.
-                                </p>
                             </div>
                             :
                             <div className={"content"}>
                                 <p>
-                                   At the end of each data collection, you have the task to type in a given password
+                                   Each data collection starts with the task to type in a given password
                                     into an input field.
                                 </p>
                                 <p>
@@ -184,9 +181,6 @@ export default class MouseTask extends Component {
                                     Please press the "Enter" key to confirm your entry. If you have typed the password
                                     incorrectly, you will be notified. The task ends as soon as you have typed the password correctly
                                     and pressed enter to confirm your entry.
-                                </p>
-                                <p>
-                                    After the task, the data collection window will close automatically.
                                 </p>
                             </div>
                         }
@@ -207,7 +201,7 @@ export default class MouseTask extends Component {
         return (
             <div>
                 <KeyboardTracker onEvent={(e) => this.onKeyboardEvent(e)} />
-                <div className="card" style={{ width: this.state.taskWindowSize}}>
+                <div className="card" style={{ width: this.state.taskWindowSize, marginTop: "1rem"}}>
                     <header className="card-header">
                         <p className="card-header-title">
                             {this.props.language === "german" ?

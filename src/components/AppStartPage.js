@@ -39,7 +39,7 @@ export default function AppStartPage (props) {
                            <p>
                                Während Sie an der Studie teilnehmen und solange die Study-App ausgeführt wird, öffnet die Study-App in
                                regelmäßigen Zeitabständen von 60 Minuten ein Fenster zur Datenerhebung. Die Datenerhebung umfasst zwei Teile und dauert
-                               etwa 30 Sekunden. Im ersten Teil geht es darum, Fragen zu beantworten. Im zweiten Teil werden Sie gebeten, eine Aufgabe zu bearbeiten.
+                               etwa 30 Sekunden. Im ersten Teil geht es darum, eine Aufgabe zu bearbeiten. Im zweiten Teil werden Sie gebeten, Fragen zu beantworten.
                                Beide Teile werden Ihnen in Schritt 2 und Schritt 3 dieser Einführung genauer erläutert.
                            </p>
                            <p>
@@ -124,7 +124,7 @@ export default function AppStartPage (props) {
                                While you are participating in this study and as long as the Study-App is running, the Study-App will open
                                a window at regular intervals of 60 minutes for a data collection. The data collection
                                consists of two parts and completing it takes about 30 seconds only. In the first part, you have to
-                               answer a questionnaire. In the second part, you have to work on a task. Both parts will
+                               work on a task. In the second part, you have to answer a questionnaire. Both parts will
                                be explained in Step 2 and 3 in this introduction in more detail.
                            </p>
                            <p>

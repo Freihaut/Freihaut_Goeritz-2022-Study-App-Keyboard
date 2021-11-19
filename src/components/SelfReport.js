@@ -65,9 +65,9 @@ export default class SelfReport extends Component {
                     <header className="modal-card-head">
                         <p className="modal-card-title"><b>
                             {this.props.language === "german" ?
-                                "Schritt 2: Vorschau der Fragen"
+                                "Schritt 3: Vorschau der Fragen"
                                 :
-                                "Step 2: Preview of Questionnaire Items"
+                                "Step 3: Preview of Questionnaire Items"
                             }
                         </b></p>
                     </header>
@@ -75,7 +75,7 @@ export default class SelfReport extends Component {
                         {this.props.language === "german" ?
                             <div className={"content"}>
                                 <p>
-                                    Zu Beginn jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
+                                    Zu Abschluss jeder Datenerhebung werden Ihnen 2 Fragen zu Ihrem aktuellen Befinden
                                     angezeigt.
                                 </p>
                                 <p>
@@ -86,7 +86,7 @@ export default class SelfReport extends Component {
                             :
                             <div className={"content"}>
                                 <p>
-                                   At the beginning of each data collection, you will be asked 2 questions regarding your
+                                   Each data collection ends with 2 questions regarding your
                                     current emotional state.
                                 </p>
                                 <p>
@@ -149,7 +149,7 @@ export default class SelfReport extends Component {
                 <div style={{marginTop: "5rem", marginBottom: "1.5rem", width: "100%", textAlign: "center"}}>
                     <button className={this.state.hasEnded ? "button is-link is-loading" : "button is-link"}
                             disabled={this.state.hasEnded}
-                            onClick={() => this.endSelfReport()}>{this.props.language === "german" ? "Weiter" : "Continue"}</button>
+                            onClick={() => this.endSelfReport()}>{this.props.language === "german" ? "Eingabe abschließen" : "Submit entry"}</button>
                 </div>
                 {this.renderInstruction()}
             </div>

@@ -16,20 +16,20 @@ export default class DataGrabber extends Component {
         super(props);
 
         this.state = {
-            phase: "selfReport"
+            phase: "keyboardTask"
         }
 
         this.grabbedData = {}
     }
 
 
-    // switch from the self Report to the Keyboard Task
-    endSelfReport(data) {
+    // switch from the Keyboard Task to the self-report and save the logged data
+    endTask(data) {
 
         // add the self report data to the grabbed data dictionary
        Object.assign(this.grabbedData, data);
 
-        this.setState({phase: "keyboardTask"});
+        this.setState({phase: "selfReport"});
     }
 
     // end the DataGrabber and log the grabbed Data
@@ -46,13 +46,13 @@ export default class DataGrabber extends Component {
         return(
             <div style={{display: "flex", alignItems: "center", height: "100vh"}}>
                 <div style={{margin: "auto"}}>
-                    {this.state.phase === "keyboardTask" ? <KeyboardTask intro={false} endTask={(data) => this.endGrabber(data)}
+                    {this.state.phase === "keyboardTask" ? <KeyboardTask intro={false} endTask={(data) => this.endTask(data)}
                                                                          zoom={this.props.zoom}
                                                                          taskWindowSize={this.props.taskWindowSize}
                                                                          language={this.props.language}/>
                         :
                         this.state.phase === "selfReport" ? <SelfReport intro={false}
-                                                                        endReport={(e) => this.endSelfReport(e)}
+                                                                        endReport={(e) => this.endGrabber(e)}
                                                                         zoom={this.props.zoom}
                                                                         language={this.props.language}/>
                             : null}
