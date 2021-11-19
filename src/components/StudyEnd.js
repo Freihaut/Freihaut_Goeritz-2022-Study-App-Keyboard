@@ -25,11 +25,10 @@ export default function StudyEnd (props) {
                                         <p>
                                             Die Study-App erfüllt nun keinen Zweck mehr und Sie können die Study-App deinstallieren. Es ist empfohlen,
                                             die Study-App zu deinstallieren. Die Deinstallation der Study-App ist jedoch nicht notwendig.
-                                            &nbsp;<a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
+                                            In den Unterlagen zur Study-App finden Sie eine kurze <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
                                             "https://drive.google.com/file/d/19g-moeXB14D4TNY0lz6HIVA8F62t-i0c/view?usp=sharing"
                                             :
-                                            "https://drive.google.com/file/d/1vR-STJFqimrlbmRX4u3QI8VLzyoAsVPa/view?usp=sharing")}}>In den Unterlagen zur Study-App</a>&nbsp;
-                                            finden Sie eine kurze Anleitung zur Deinstallation. Falls Sie
+                                            "https://drive.google.com/file/d/1vR-STJFqimrlbmRX4u3QI8VLzyoAsVPa/view?usp=sharing")}}>Anleitung zur Deinstallation</a>. Falls Sie
                                             Hilfe bei der Deinstallation benötigen, wenden Sie sich gerne jederzeit an den unten stehenden Kontakt.
                                         </p>
                                         <p>
@@ -71,19 +70,16 @@ export default function StudyEnd (props) {
                                         <p>
                                             The Study-App no longer serves any purpose and you can uninstall the Study-App.
                                             It is recommended to uninstall the Study-App, but it is not compulsory.
-                                            In the
-                                            &nbsp;<a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
+                                            In the Study-App documentations you will find <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
                                             "https://drive.google.com/file/d/1YshqDakWBbrsig1OWhqsK37acP-a4xXU/view?usp=sharing"
                                             :
-                                            "https://drive.google.com/file/d/1TN1rDrUGGVdT6vEpINFU32divhGmarly/view?usp=sharing")}}>Study-App documentations</a>&nbsp;
-                                            you will find instructions about the uninstallation process. If you need any help
+                                            "https://drive.google.com/file/d/1TN1rDrUGGVdT6vEpINFU32divhGmarly/view?usp=sharing")}}>instructions about the uninstallation process</a>&nbsp;. If you need any help
                                             with the uninstallation, please feel free to contact us without hesitation.
                                         </p>
                                         <p>
                                             If you are a psychology student at the Freiburg University you can receive
                                             2 hours of participation credits in exchange for you study participation.
-                                            Please make note of your personal participation code and follow the
-                                            <a onClick={()=> {shell.openExternal("https://drive.google.com/file/d/1XNzVMLmEnGt4eSb8_gxY8GAgOzR0H5e3/view?usp=sharing")}}>
+                                            Please make note of your personal participation code and follow the <a onClick={()=> {shell.openExternal("https://drive.google.com/file/d/1XNzVMLmEnGt4eSb8_gxY8GAgOzR0H5e3/view?usp=sharing")}}>
                                                 instructions of crediting</a>.
                                         </p>
                                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Your participation code: {props.participantId}</p>
