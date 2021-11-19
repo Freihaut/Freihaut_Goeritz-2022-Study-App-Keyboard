@@ -54,8 +54,8 @@ const createWindow = (appPage) => {
     targetSize = screenSize.width;
   }
 
-  // let the browser window target take up 75% of the available screen size
-  targetSize = Math.floor(targetSize * 0.75);
+  // let the browser window target take up 85% of the available screen size
+  targetSize = Math.floor(targetSize * 0.85);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -104,9 +104,9 @@ const createWindow = (appPage) => {
 
       let newSize;
       if (display.workAreaSize.width > display.workAreaSize.height) {
-        newSize = Math.floor(display.workAreaSize.height * 0.75)
+        newSize = Math.floor(display.workAreaSize.height * 0.85)
       } else {
-        newSize = Math.floor(display.workAreaSize.width * 0.75)
+        newSize = Math.floor(display.workAreaSize.width * 0.85)
       }
 
       // need to manually setResizable to true and false when resizing, because it wont work otherwise when the resizable
@@ -217,7 +217,7 @@ const createSideWindow = (appPage) => {
   }
 
   // let the browser window target take up 85% of the available screen size
-  targetSize = Math.floor(targetSize * 0.75);
+  targetSize = Math.floor(targetSize * 0.85);
 
   // Create the browser window.
   sideWindow = new BrowserWindow({
@@ -269,9 +269,9 @@ const createSideWindow = (appPage) => {
 
     let newSize;
     if (display.workAreaSize.width > display.workAreaSize.height) {
-      newSize = Math.floor(display.workAreaSize.height * 0.75)
+      newSize = Math.floor(display.workAreaSize.height * 0.85)
     } else {
-      newSize = Math.floor(display.workAreaSize.width * 0.75)
+      newSize = Math.floor(display.workAreaSize.width * 0.85)
     }
 
     // need to manually setResizable to true and false when resizing, because it wont work otherwise when the resizable
@@ -415,8 +415,8 @@ const startLogger = (timeDelay) => {
         // check if the startTime of the Browser window creation is after the time limit of the study (14 days)
         dataStorage.get("s", (err, data) => {
           // if the start time is older than xx days (length of the study), show the study end page
-          //TODO: Set an end time of the study (12096e5 = in 2 weeks / + 14 days)
-          if (Date.now() > data.d + 12096e5) {
+          //TODO: Set an end time of the study (864e6 = + 10 days = 864000000 milliseconds)
+          if (Date.now() > data.d + 864e6) {
             // end the study if the study time is over
             endStudy();
           } else {

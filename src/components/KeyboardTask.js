@@ -22,7 +22,7 @@ export default class MouseTask extends Component {
         }
 
         // define a password that is used in the typing task
-        this.password = "Test8673!"
+        this.password = "BallOrange3829!"
 
         // settings for the modal if its the task intro and the modal is triggered
         if (this.props.intro) {
@@ -103,6 +103,13 @@ export default class MouseTask extends Component {
         }, 20)
     }
 
+    // prevent the use of the Numpad numbers
+    preventNumpad(e) {
+        if (e.which >= 96 && e.which <= 105) {
+            e.preventDefault();
+        }
+    }
+
     // end the task and send the typing data into the parent component
     endTask() {
         this.props.endTask({
@@ -149,7 +156,12 @@ export default class MouseTask extends Component {
                                     in ein Textfeld abzuschreiben.
                                 </p>
                                 <p>
-                                    Bestätigen Sie die Eingabe durch Drücken der Enter Taste. Falls Sie das Passwort
+                                    Das Passwort besteht aus Buchstaben, Zahlen und einem Sonderzeichen. Verwenden Sie zum
+                                    schreiben der Zahlen nur die Zahlentasten über den Buchstaben auf Ihrer Tastatur. Die
+                                    Eingabe der Zahlen mit dem "Numpad" ist für diese Aufgabe deaktiviert.
+                                </p>
+                                <p>
+                                    Bestätigen Sie die Eingabe des Passworts durch Drücken der "Enter" Taste. Falls Sie das Passwort
                                     falsch abgeschrieben haben, wird Ihnen dies angezeigt. Die Aufgabe endet sobald
                                     Sie das Passwort korrekt abgeschrieben haben und Ihre Eingabe mit Enter bestätigt haben.
                                 </p>
@@ -162,6 +174,11 @@ export default class MouseTask extends Component {
                                 <p>
                                    At the end of each data collection, you have the task to type in a given password
                                     into an input field.
+                                </p>
+                                <p>
+                                    The password contains letters, numbers and one special character. You can only type
+                                    in numbers using the number keys above the letter keys. The number keys on the
+                                    "Numpad" are disabled for this task.
                                 </p>
                                 <p>
                                     Please press the "Enter" key to confirm your entry. If you have typed the password
@@ -194,7 +211,7 @@ export default class MouseTask extends Component {
                     <header className="card-header">
                         <p className="card-header-title">
                             {this.props.language === "german" ?
-                                "Bitte geben Sie das Passwort ein und bestätigen Sie Ihre Eingabe durch das Drücken der Enter-Taste"
+                                "Bitte geben Sie das Passwort ein und bestätigen Sie die Eingabe mit der Enter-Taste"
                                 :
                                 "Please type the displayed password into the input field and press enter to confirm your entry"
                             }
@@ -232,6 +249,7 @@ export default class MouseTask extends Component {
                                            ref={this.inputRef}
                                            onMouseDown={(event) => this.preventClicking(event)}
                                            onBlur={(event) => this.preventFocusChange(event)}
+                                           onKeyDown={(event) => this.preventNumpad(event)}
                                            placeholder={this.props.language === "german" ? "Geben Sie Ihr Passwort ein" : "Please enter your password"}
                                            spellCheck={false}
                                            disabled={this.state.passwordSubmission}
@@ -240,7 +258,7 @@ export default class MouseTask extends Component {
                                 <p className="help is-large is-danger"
                                    style={{visibility: this.state.textIsCorrect ? "hidden" : "visible"}}>
                                     {this.props.language === "german" ?
-                                        "Das von Ihnen eingegebene Passwort ist inkorrekt"
+                                        "Das eingegebene Passwort ist falsch"
                                         :
                                         "The entered password is incorrect"
                                     }

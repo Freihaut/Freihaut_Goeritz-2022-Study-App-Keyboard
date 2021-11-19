@@ -74,7 +74,7 @@ export default function AppStartPage (props) {
                                Auslassen einer Datenerhebung beendet nicht Ihre Studienteilnahme.
                            </p>
                            <p>
-                               Die Studie endet automatisch 14 Tage nachdem Sie die Studie in Schritt 4 gestartet haben.
+                               Die Studie endet automatisch 10 Tage nachdem Sie die Studie in Schritt 4 gestartet haben.
                                Die Study-App zeigt Ihnen an, dass die Datenerhebung beendet ist
                                und es öffnet sich danach kein Fenster zur Datenerhebung mehr.
                            </p>
@@ -83,7 +83,7 @@ export default function AppStartPage (props) {
                                Study-App deinstallieren.
                            </p>
                            <p>
-                               Psychologiestudierende der Universität Freiburg können für ihre Studienteilnahme xx
+                               Psychologiestudierende der Universität Freiburg können für ihre Studienteilnahme 2
                                Versuchspersonenstunden erhalten. Nach Beendigung der Studie erhalten Sie dafür einen
                                Code, mit dem Sie Ihre Studienteilnahme validieren können.
                            </p>
@@ -156,7 +156,7 @@ export default function AppStartPage (props) {
                                &nbsp;<img style={{height: "13px"}} src={CloseSymbolImage}/>. Omitting a data collection does not end your participation in this study.
                            </p>
                            <p>
-                               This study will be terminated automatically 14 days after you started the study in Step 4.
+                               This study will be terminated automatically 10 days after you started the study in Step 4.
                                The Study-App will display that the data collection has ended and that no further data collection window will be launched.
                            </p>
                            <p>
@@ -164,7 +164,7 @@ export default function AppStartPage (props) {
                            </p>
                            <p>
                                If you are a psychology student at the Freiburg University you can receive
-                               xx hours of participation credits in exchange for you study participation.
+                               2 hours of participation credits in exchange for you study participation.
                                At the end of the study, you will receive a code to validate your study participation.
                            </p>
                            <p>
