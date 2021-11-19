@@ -26,15 +26,18 @@ export default function StudyEnd (props) {
                                             Die Study-App erfüllt nun keinen Zweck mehr und Sie können die Study-App deinstallieren. Es ist empfohlen,
                                             die Study-App zu deinstallieren. Die Deinstallation der Study-App ist jedoch nicht notwendig.
                                             &nbsp;<a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
-                                            "https://google.com" : "https://google.com")}}>In den Unterlagen zur Study-App</a>&nbsp;
+                                            "https://drive.google.com/file/d/19g-moeXB14D4TNY0lz6HIVA8F62t-i0c/view?usp=sharing"
+                                            :
+                                            "https://drive.google.com/file/d/1vR-STJFqimrlbmRX4u3QI8VLzyoAsVPa/view?usp=sharing")}}>In den Unterlagen zur Study-App</a>&nbsp;
                                             finden Sie eine kurze Anleitung zur Deinstallation. Falls Sie
                                             Hilfe bei der Deinstallation benötigen, wenden Sie sich gerne jederzeit an den unten stehenden Kontakt.
                                         </p>
                                         <p>
                                             Falls Sie Psychologie an der Universität Freiburg studieren, können Sie für Ihre Studienteilnahme
                                             2 Versuchspersonenstunden erhalten. Notieren Sie sich dafür Ihren persönlichen
-                                            Versuchspersonencode und folgen Sie den <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
-                                            "https://google.com" : "https://google.com")}}>Hinweisen zum Erhalten der Versuchspersonenstunden</a>.
+                                            Versuchspersonencode und folgen Sie den <a onClick={()=>
+                                        {shell.openExternal("https://drive.google.com/file/d/1_RSqz05Y7IugOFa6CECg_77pkdhtl7Sz/view?usp=sharing")}}>
+                                            Hinweisen zum Erhalten der Versuchspersonenstunden</a>.
                                         </p>
                                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Ihr VPN Code: {props.participantId}</p>
                                         <br/>
@@ -70,7 +73,9 @@ export default function StudyEnd (props) {
                                             It is recommended to uninstall the Study-App, but it is not compulsory.
                                             In the
                                             &nbsp;<a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
-                                            "https://google.com" : "https://google.com")}}>Study-App documentations</a>&nbsp;
+                                            "https://drive.google.com/file/d/1YshqDakWBbrsig1OWhqsK37acP-a4xXU/view?usp=sharing"
+                                            :
+                                            "https://drive.google.com/file/d/1TN1rDrUGGVdT6vEpINFU32divhGmarly/view?usp=sharing")}}>Study-App documentations</a>&nbsp;
                                             you will find instructions about the uninstallation process. If you need any help
                                             with the uninstallation, please feel free to contact us without hesitation.
                                         </p>
@@ -78,8 +83,8 @@ export default function StudyEnd (props) {
                                             If you are a psychology student at the Freiburg University you can receive
                                             2 hours of participation credits in exchange for you study participation.
                                             Please make note of your personal participation code and follow the
-                                            <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
-                                            "https://google.com" : "https://google.com")}}>instructions of crediting</a>.
+                                            <a onClick={()=> {shell.openExternal("https://drive.google.com/file/d/1XNzVMLmEnGt4eSb8_gxY8GAgOzR0H5e3/view?usp=sharing")}}>
+                                                instructions of crediting</a>.
                                         </p>
                                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Your participation code: {props.participantId}</p>
                                         <br/>

@@ -157,7 +157,7 @@ export default class MouseTask extends Component {
                                 </p>
                                 <p>
                                     Das Passwort besteht aus Buchstaben, Zahlen und einem Sonderzeichen. Verwenden Sie zum
-                                    schreiben der Zahlen nur die Zahlentasten über den Buchstaben auf Ihrer Tastatur. Die
+                                    Schreiben der Zahlen nur die Zahlentasten über den Buchstaben auf Ihrer Tastatur. Die
                                     Eingabe der Zahlen mit dem "Numpad" ist für diese Aufgabe deaktiviert.
                                 </p>
                                 <p>

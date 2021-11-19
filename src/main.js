@@ -29,7 +29,7 @@ let tray = null;
 
 // set a hard coded study end date
 // TODO: Set a hard coded study end date
-const studyEndDate = new Date(2021, 11, 27);
+const studyEndDate = new Date(2022, 0, 1);
 
 // hard code the study language
 // --> this is a pragmatic solution to easily create an english or a german version of the study-app. It certainly
