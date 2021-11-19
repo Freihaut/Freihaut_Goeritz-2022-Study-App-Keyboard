@@ -145,7 +145,7 @@ export default class App extends Component {
 
         // add the version number to the tut data to keep track of potential changes in the study app version
         //TODO: Change the app Version based on the app-language
-        const studyStartData = { ...tutData, ...{ appVersion: "KeyboardStudy_ger" }, ...{ "os": process.platform } }
+        const studyStartData = { ...tutData, ...{ appVersion: "KeyboardStudy_eng" }, ...{ "os": process.platform } }
 
         // get the tutorial data (sociodemographics) and send them to firebase when the tutorial is done
         // check if the user logged into firebase and check if the user is online or offline
