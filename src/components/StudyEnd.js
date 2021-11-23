@@ -35,7 +35,7 @@ export default function StudyEnd (props) {
                                             Falls Sie Psychologie an der Universität Freiburg studieren, können Sie für Ihre Studienteilnahme
                                             2 Versuchspersonenstunden erhalten. Notieren Sie sich dafür Ihren persönlichen
                                             Versuchspersonencode und folgen Sie den <a onClick={()=>
-                                        {shell.openExternal("https://drive.google.com/file/d/1_RSqz05Y7IugOFa6CECg_77pkdhtl7Sz/view?usp=sharing")}}>
+                                        {shell.openExternal("https://drive.google.com/file/d/1iUwdxfeWN0Bed3Sdxb-u2_SBs3GnLSw6/view?usp=sharing")}}>
                                             Hinweisen zum Erhalten der Versuchspersonenstunden</a>.
                                         </p>
                                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Ihr VPN Code: {props.participantId}</p>
