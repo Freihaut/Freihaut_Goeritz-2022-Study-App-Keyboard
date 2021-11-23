@@ -28,7 +28,7 @@ export default function StudyEnd (props) {
                                             In den Unterlagen zur Study-App finden Sie eine kurze <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
                                             "https://drive.google.com/file/d/19g-moeXB14D4TNY0lz6HIVA8F62t-i0c/view?usp=sharing"
                                             :
-                                            "https://drive.google.com/file/d/1LxGYlovaDguHPadcFLLNn5nNLqOHWtHI/view?usp=sharing")}}>Anleitung zur Deinstallation</a>. Falls Sie
+                                            "https://drive.google.com/file/d/1hit9pDpy3b6tG7wF-wdsVhEKe6ga8QlD/view?usp=sharing")}}>Anleitung zur Deinstallation</a>. Falls Sie
                                             Hilfe bei der Deinstallation benötigen, wenden Sie sich gerne jederzeit an den unten stehenden Kontakt.
                                         </p>
                                         <p>
