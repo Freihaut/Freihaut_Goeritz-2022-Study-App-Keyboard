@@ -146,8 +146,8 @@ const createWindow = (appPage) => {
       if (Date.now() > studyEndDate) {
         endStudy();
       } else {
-        //TODO: Choose a time until the logger starts (90 minutes --> 85 silence + 5 min logging)
-        startLogger(55 * 60 * 1000)
+        //TODO: Choose a time until the logger starts (60 minutes)
+        startLogger(60 * 60 * 1000)
       }
     })
 
@@ -183,8 +183,8 @@ const createWindow = (appPage) => {
         if (Date.now() > studyEndDate) {
           endStudy();
         } else {
-          //TODO: Set a timer to start the logger after x minutes (90 minutes, 85 min silence + 5 min logging)
-          startLogger(55 * 60 * 1000)
+          //TODO: Set a timer to start the logger after x minutes (60 minutes)
+          startLogger(60 * 60 * 1000)
         }
       }
     })
