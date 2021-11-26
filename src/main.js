@@ -244,7 +244,7 @@ const createSideWindow = (appPage) => {
   // load the entrypoint index.html of the app
   sideWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  sideWindow.webContents.openDevTools();
+  // sideWindow.webContents.openDevTools();
 
   // send a message to the page to load the correct component and show the main window after it finished loading
   // in the electron docs, ready-to-show is recommended for showing the main window, but IPC communication to the
@@ -347,7 +347,7 @@ if (!gotTheLock) {
         } else {
           if (hasKey) {
             // TODO: start the logger after 5 seconds (very shortly after the computer started with a short delay)
-            startLogger(5 * 1000);
+            startLogger(2 * 1000);
           } else {
             // start the tutorial
             createWindow("tutorial");

@@ -23,6 +23,7 @@ export default class Tutorial extends Component {
                 age: -99,
                 sex: -99,
                 nationality: -99,
+                occupation: -99
             }
         }
     }

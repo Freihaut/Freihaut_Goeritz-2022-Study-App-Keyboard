@@ -65,7 +65,7 @@ export default function StudyEnd (props) {
                                     // english version
                                     <div>
                                         <h3 className={"title"}>
-                                            Die study has ended
+                                            The study has ended
                                         </h3>
                                         <p>
                                             The Study-App no longer serves any purpose and you can uninstall the Study-App.

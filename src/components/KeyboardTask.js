@@ -14,7 +14,7 @@ export default class MouseTask extends Component {
 
         this.state = {
             modal: this.props.intro ? "modal is-active" : "modal",
-            inputClass: "input is-large is-link",
+            inputClass: "input is-medium is-link",
             textIsCorrect: true,
             numberOfTries: 0,
             passwordSubmission: false,
@@ -67,7 +67,7 @@ export default class MouseTask extends Component {
         let writtenText = this.inputRef.current.value;
 
         // set a loading state to the input field for a few seconds to signal that the input is processed
-        this.setState({textIsCorrect: true, passwordSubmission: true, inputClass: "input is-large is-link"}, () => {
+        this.setState({textIsCorrect: true, passwordSubmission: true, inputClass: "input is-medium is-link"}, () => {
 
             setTimeout(() => {
                 // if the password is correct, end the task
@@ -79,7 +79,7 @@ export default class MouseTask extends Component {
                         textIsCorrect: false,
                         numberOfTries : this.state.numberOfTries + 1,
                         passwordSubmission: false,
-                        inputClass: "input is-large is-danger"
+                        inputClass: "input is-medium is-danger"
                     }, () => {
                         // empty and focus the input field
                         this.inputRef.current.focus();
@@ -213,19 +213,19 @@ export default class MouseTask extends Component {
                     </header>
                     <div className="card-content" style={{margin: "2.5rem"}}>
                         <div className="field">
-                            <label className="label is-large">
+                            <label className="label is-medium">
                                 {this.props.language === "german" ?
                                     "Ihr Passwort"
                                     :
                                     "Your Password"
                                 }
                             </label>
-                            <div className="control is-large">
-                                <input className="input is-large" type="text" value={this.password} disabled={true}/>
+                            <div className="control is-medium">
+                                <input className="input is-medium" type="text" value={this.password} disabled={true}/>
                             </div>
                         </div>
                         <div className="field">
-                            <label className="label is-large" style={{
+                            <label className="label is-medium" style={{
                                 WebkitUserSelect: "none",
                                 MozUserSelect: "none",
                                 msUserSelect: "none",
@@ -237,7 +237,7 @@ export default class MouseTask extends Component {
                                 }
                             </label>
                             <form onSubmit={(e) => this.checkIfEqual(e)}>
-                                <div className={this.state.passwordSubmission ? "control is-large is-loading" : "control is-large"}>
+                                <div className={this.state.passwordSubmission ? "control is-medium is-loading" : "control is-medium"}>
                                     <input className={this.state.inputClass}
                                            type="password"
                                            ref={this.inputRef}
@@ -249,7 +249,7 @@ export default class MouseTask extends Component {
                                            disabled={this.state.passwordSubmission}
                                     />
                                 </div>
-                                <p className="help is-large is-danger"
+                                <p className="help is-medium is-danger"
                                    style={{visibility: this.state.textIsCorrect ? "hidden" : "visible"}}>
                                     {this.props.language === "german" ?
                                         "Das eingegebene Passwort ist falsch"

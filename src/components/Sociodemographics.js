@@ -60,13 +60,13 @@ export default class Soziodemographics extends Component {
                 }
 
                     <div className={"field"} style={{marginTop: "25px"}}>
-                        <p className="questionTextStyle">{this.props.language === "german" ? "Ihr Alter:" : "Your Age-Group"}</p>
+                        <p className="questionTextStyle">{this.props.language === "german" ? "Ihr Alter:" : "Your Age-Group:"}</p>
                         <div className="control">
                             <div className={"select is-info"}>
                                 <select name={"age"}
                                         value={this.props.answers.age}
                                         onChange={this.handleInputChange}>
-                                    <option value={-99} disabled={true} hidden={true}>{this.props.language === "german" ? "Bitte wählen Sie aus" : "Please select"}</option>
+                                    <option value={-99} disabled={true} hidden={true}>{this.props.language === "german" ? "Bitte wählen Sie aus" : "Please select:"}</option>
                                     <option value={1}>{this.props.language === "german" ? "jünger als 30" : "younger than 30"}</option>
                                     <option value={2}>{this.props.language === "german" ? "30 bis 39" : "30 to 39"}</option>
                                     <option value={3}>{this.props.language === "german" ? "40 bis 49" : "40 to 49"}</option>
@@ -123,16 +123,55 @@ export default class Soziodemographics extends Component {
                                type="text"
                                value={this.props.answers.nationality === -99 ? "" : this.props.answers.nationality}
                                onChange={this.handleInputChange}
-                               spellcheck={false}
+                               spellCheck={false}
                                placeholder={this.props.language === "german" ? "Ihre Nationalität" : "Your Nationality"}/>
                         </div>
                 </div>
 
-                    <div style={{marginTop: "3rem", width: "100%", textAlign: "center"}}>
-                        <button className={this.props.hasEnded ? "button is-link is-loading" : "button is-link"}
-                                disabled={this.props.hasEnded}
-                                onClick={() => this.props.endSociodem()}>{this.props.language === "german" ? "Studie starten" : "Start the Study"}</button>
-                    </div>
+                <div className={"field"} style={{marginTop: "25px"}}>
+                    <span>
+                        <p className="questionTextStyle">{this.props.language === "german" ? "Ihr Beruflicher Status:" : "Your Occupational Status:"}</p>
+                        <div className={"control"}>
+                            <label className={"radio"}>
+                                <input
+                                    style={{marginRight: 5}}
+                                    type="radio"
+                                    value="0"
+                                    checked={this.props.answers.occupation === 0}
+                                    name="occupation"
+                                    onChange={this.handleInputChange}
+                                />{this.props.language === "german" ? "Berufstätig" : "Working"}
+                            </label>
+                            <label className={"radio"} style={{marginLeft: 25}}>
+                                <input
+                                    style={{marginRight: 5}}
+                                    type="radio"
+                                    value="1"
+                                    checked={this.props.answers.occupation === 1}
+                                    name="occupation"
+                                    onChange={this.handleInputChange}
+                                />{this.props.language === "german" ? "im Studium/ in der Schule" : "Student"}
+                            </label>
+                            <label className={"radio"} style={{marginLeft: 25}}>
+                                <input style={{marginRight: 5}}
+                                       type="radio"
+                                       value="2"
+                                       checked={this.props.answers.occupation === 2}
+                                       name="occupation"
+                                       onChange={this.handleInputChange}
+                                />{this.props.language === "german" ? "Sonstiges" : "Other"}
+                            </label>
+                        </div>
+                    </span>
+                </div>
+
+
+
+                <div style={{marginTop: "3rem", width: "100%", textAlign: "center"}}>
+                    <button className={this.props.hasEnded ? "button is-link is-loading" : "button is-link"}
+                            disabled={this.props.hasEnded}
+                            onClick={() => this.props.endSociodem()}>{this.props.language === "german" ? "Studie starten" : "Start the Study"}</button>
+                </div>
 
             </div>
         );
