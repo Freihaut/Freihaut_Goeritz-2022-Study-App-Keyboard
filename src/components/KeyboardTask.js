@@ -18,7 +18,7 @@ export default class MouseTask extends Component {
             textIsCorrect: true,
             numberOfTries: 0,
             passwordSubmission: false,
-            taskWindowSize: Math.floor(this.props.taskWindowSize * 0.66)
+            taskWindowSize: Math.floor(this.props.taskWindowSize * 0.85)
         }
 
         // define a password that is used in the typing task
@@ -48,7 +48,7 @@ export default class MouseTask extends Component {
     // size)
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.taskWindowSize !== this.props.taskWindowSize) {
-            this.setState({ taskWindowSize: Math.floor(this.props.taskWindowSize * 0.66) });
+            this.setState({ taskWindowSize: Math.floor(this.props.taskWindowSize * 0.85) });
         }
     }
 
@@ -140,7 +140,7 @@ export default class MouseTask extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>
+                        <p className="modal-card-title" style={{fontSize: "1.3em"}}><b>
                             {this.props.language === "german" ?
                                 "Schritt 2: Vorschau der Aufgabe"
                                 :

@@ -46,14 +46,14 @@ export default class Soziodemographics extends Component {
                     </div>
                     :
                     <div className={"content"}>
-                        <h4>Step 4: Complete the Introduction and Start the Study Participation</h4>
+                        <h4>Step 4: Complete the Introduction and Start the Study</h4>
                         <p>
                             You have reached the end of the introduction to this Study-App. Lastly, please fill in your
                             personal information and consent that you wish to start participation.
                         </p>
                         <p>
-                            If you click “Start study”, this window will be closed and the Study-App will sleep until
-                            it launches a new window for the first data collection after about 60 minutes.
+                            If you click “Start the study”, this window will be closed and the Study-App will sleep until
+                            it launches the first data collection window after about 60 minutes.
                         </p>
                         <hr/>
                     </div>

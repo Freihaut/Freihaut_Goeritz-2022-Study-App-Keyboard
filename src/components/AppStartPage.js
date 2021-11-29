@@ -108,7 +108,7 @@ export default function AppStartPage (props) {
                            {props.tutorial ?
                                <div>
                                    <h3 className={"title is-4"}>
-                                       Welcome to the introduction to the study process
+                                       Welcome to the study introduction
                                    </h3>
                                    <p>
                                        There are four steps in this introduction. Once you complete all four steps, the study will start.
@@ -122,8 +122,8 @@ export default function AppStartPage (props) {
                            </h4>
                            <p>
                                While you are participating in this study and as long as the Study-App is running, the Study-App will open
-                               a window at regular intervals of 60 minutes for a data collection. The data collection
-                               consists of two parts and completing it takes about 30 seconds only. In the first part, you have to
+                               a data collection window at regular intervals of 60 minutes. The data collection
+                               consists of two parts and completing it takes about 30 seconds. In the first part, you have to
                                work on a task. In the second part, you have to answer a questionnaire. Both parts will
                                be explained in Step 2 and 3 in this introduction in more detail.
                            </p>
@@ -151,7 +151,7 @@ export default function AppStartPage (props) {
                            </figure>
 
                            <p>
-                               If the Study-App openes a window for data collection and you do not wish
+                               If the Study-App opens a data collection window and you do not wish
                                or are not able to take part, you can close the window by clicking the <strong>close button</strong>
                                &nbsp;<img style={{height: "13px"}} src={CloseSymbolImage}/>. Omitting a data collection does not end your participation in this study.
                            </p>
@@ -165,7 +165,7 @@ export default function AppStartPage (props) {
                            <p>
                                If you are a psychology student at the Freiburg University you can receive
                                2 hours of participation credits in exchange for you study participation.
-                               At the end of the study, you will receive a code to validate your study participation.
+                               At the end of the study, you will be given a code to validate your study participation.
                            </p>
                            <p>
                                For further inquiries regarding this Study-App, you can contact:

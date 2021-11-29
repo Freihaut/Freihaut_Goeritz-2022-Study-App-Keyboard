@@ -63,7 +63,7 @@ export default class SelfReport extends Component {
                 <div className="modal-background">{null}</div>
                 <div className="modal-content">
                     <header className="modal-card-head">
-                        <p className="modal-card-title"><b>
+                        <p className="modal-card-title" style={{fontSize: "1.3em"}}><b>
                             {this.props.language === "german" ?
                                 "Schritt 3: Vorschau der Fragen"
                                 :

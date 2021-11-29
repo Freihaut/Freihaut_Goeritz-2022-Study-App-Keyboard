@@ -73,19 +73,19 @@ export default function StudyEnd (props) {
                                             In the Study-App documentations you will find <a onClick={()=> {shell.openExternal(process.platform === "darwin" ?
                                             "https://drive.google.com/file/d/1ZHO-o_Tho8OZJsNOErEoYhc9tGSSAt7-/view?usp=sharing"
                                             :
-                                            "https://drive.google.com/file/d/1TN1rDrUGGVdT6vEpINFU32divhGmarly/view?usp=sharing")}}>instructions about the uninstallation process</a>&nbsp;. If you need any help
+                                            "https://drive.google.com/file/d/1TN1rDrUGGVdT6vEpINFU32divhGmarly/view?usp=sharing")}}>instructions about the uninstallation process.</a> If you need any help
                                             with the uninstallation, please feel free to contact us without hesitation.
                                         </p>
                                         <p>
                                             If you are a psychology student at the Freiburg University you can receive
                                             2 hours of participation credits in exchange for you study participation.
                                             Please make note of your personal participation code and follow the <a onClick={()=> {shell.openExternal("https://drive.google.com/file/d/1XNzVMLmEnGt4eSb8_gxY8GAgOzR0H5e3/view?usp=sharing")}}>
-                                                instructions of crediting</a>.
+                                            instructions of crediting.</a>
                                         </p>
                                         <p style={{fontStyle: "italic", fontWeight: "bold"}}>Your participation code: {props.participantId}</p>
                                         <br/>
                                         <h4 className={"title"}>
-                                            Thank you very much for the participation in this study and your contribution to science!
+                                            Thank you very much for your participation in this study and your contribution to science!
                                         </h4>
                                         <p>
                                             If you have any inquiries about the study or Study-App, please feel free to contact:
