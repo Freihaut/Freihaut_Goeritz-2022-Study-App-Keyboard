@@ -5,13 +5,14 @@ keyboard typing behavior.
 
 ### Study-App Description
 
-The study-app needs to be installed by participants and logs participants keyboard typing as well as their stress 
-level in frequent intervals of about 60 minutes. The typing task resembles a password typing situation in which
-participants are shown a password and have to retype it into an input field. The self-report measures are the 
-valence and arousal scales.
+After installation, the Study-App openes a data collection window to log participants keyboard typing behavior as well 
+as their emotional state ratings in frequent intervals of about 60 minutes. Keyboard-Typing behavior is logged during
+a password-typing task. Emotional states are logged using two self-report questions asking about valence and arousal.
 
-Before the start of the measurement intervals, the study-app preceeds with a tutorial about the study-app.
-The study duration is 14 days. The study-app will notify participants about the study end and will stop data measurement.
+The Study-App is configured to handle the study process automatically. After installation, it automatically starts
+a tutorial. After finishing the tutorial, the Study-App sleeps for an hour before starting a data collection. The
+Study-App automatically starts after the computer is restarted. The study duration is 10 days. After this limit,
+the Study-App notifies participants about the end of the study and does not collect any data anymore.
 
 ### Technical Information
 
@@ -21,4 +22,8 @@ as well as [Electron Builder](https://www.electron.build/) to package the app as
 
 The backend for saving our data is [Firebase](https://firebase.google.com/). If the participant is not online, the study-app
 saves all data locally and pushes the data into the database once the participant is online again.
+
+### Contact
+
+For questions regarding the Study-App, contact: paul.freihaut@psychologie.uni-freiburg.de
 

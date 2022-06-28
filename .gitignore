@@ -90,3 +90,6 @@ out/
 
 # Electron Builder
 dist/
+
+# Webstorm files
+*.idea/
