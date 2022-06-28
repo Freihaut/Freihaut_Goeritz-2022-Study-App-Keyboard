@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6772389.svg)](https://doi.org/10.5281/zenodo.6772389)
+
 ## Study-App
 
 This repository contains the study-app that was used for a longitudinal study about the relationship between stress and 
