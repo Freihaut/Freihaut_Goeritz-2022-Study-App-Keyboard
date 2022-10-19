@@ -5,6 +5,8 @@
 This repository contains the study-app that was used for a longitudinal study about the relationship between stress and 
 keyboard typing behavior.
 
+The corresponding research manuscript is: Freihaut, P. & Göritz, A. S. (2022). Unlocking feelings with a password – An investigation of the relationship between keyboard typing and affective states. Manuscript in review. Preprint available at http://dx.doi.org/10.2139/ssrn.4206734
+
 ### Study-App Description
 
 After installation, the Study-App openes a data collection window to log participants keyboard typing behavior as well 
